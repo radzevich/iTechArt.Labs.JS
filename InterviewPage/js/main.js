@@ -13,55 +13,75 @@ var jsonQuestion = {
 var answers = [
     {
         id: 0,
-        questionId: 1,
+        questionId: 0,
         text: "В ньютонах"
     }, 
     {
-        id: 0,
-        questionId: 1,
+        id: 1,
+        questionId: 0,
+        text: "В амперах"
+    },
+    {
+        id: 2,
+        questionId: 0,
         text: "В кольце власти"
     },
     {
-        id: 0,
-        questionId: 1,
-        text: "в Арни"
-    },
-    {
-        id: 0,
-        questionId: 1,
+        id: 3,
+        questionId: 0,
         text: ", Брат"
     }
 ]
 
 $(document).ready(function() {
-    show('.page__list', '<p>Some text1</p>');
-    show('.page__list', '<p>Some text2</p>');
-    show('.page__list', '<p>Some text3</p>');
+    // show('.page__list', '<p>Some text1</p>');
+    // show('.page__list', '<p>Some text2</p>');
+    // show('.page__list', '<p>Some text3</p>');
 
     createQuestionTemplate.call(loadQuestion(0));
 }); 
 
-function singleAnswerQuestionCreator() {
+function singleAnswerQuestionCreator(jsonQuestion) {
+    var _div = (document.createElement('div'));
+    var $form = $('<form></form>');
 
+    for (var i = 0; i < jsonQuestion.answers.length; i++) {
+        var _answer = loadAnswer(jsonQuestion.answers[i].id);     
+
+        var $radio = $('<input>').attr({
+                                        type: 'radio', 
+                                        name: 'colorinput', 
+                                        value: _answer.id
+                                      })
+        
+        $radio.append(_answer.text);
+        $form.append($radio);
+    }
+
+    $(_div).append('<h4>' + jsonQuestion.text + '</h4>');
+    $(_div).append($form);
+    
+    return _div;
 }
 
-function polyAnswerQuestionCreator() {
+function polyAnswerQuestionCreator(jsonQuestion) {
     
 }
 
-function textInputAnswerQuestionCreator() {
+function textInputAnswerQuestionCreator(jsonQuestion) {
     
 }
 
 function createQuestionTemplate() {
     var questionTemplateCreators = [
-        singleAnswerQuestionCreator(),
-        polyAnswerQuestionCreator(),
-        textInputAnswerQuestionCreator()
+        singleAnswerQuestionCreator,
+        polyAnswerQuestionCreator,
+        textInputAnswerQuestionCreator
     ]
 
-    
+    questionTemplateCreators[this.typeId](this);
 }
+
 
 function loadQuestion(id) {
     //TODO: getting question with pointed @id.
@@ -69,7 +89,7 @@ function loadQuestion(id) {
 }
 
 function loadAnswer(id) {
-    for (var i = 0; i < answer.length; i++) {
+    for (var i = 0; i < answers.length; i++) {
         if (answers[i].id === id) {
             return answers[i];
         }
