@@ -1,0 +1,16 @@
+.header .navbar {
+    height: 140px;
+}
+
+.header .navbar-nav {
+    margin-top: 30px;
+    margin-right: 20px;
+}
+
+.header .navbar-nav .navbar__text {
+    font-size: 24px;
+}
+
+.header .glyphicon {
+    font-size: 19px;
+}

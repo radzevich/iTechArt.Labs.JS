@@ -1,0 +1,8 @@
+.footer {
+    height: 60px;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 30px;
+    box-sizing: border-box;
+    text-align: center;
+}
