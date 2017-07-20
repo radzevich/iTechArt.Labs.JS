@@ -65,11 +65,41 @@ function singleAnswerQuestionCreator(jsonQuestion) {
 }
 
 function polyAnswerQuestionCreator(jsonQuestion) {
-    
+    var _div = (document.createElement('div'));
+    var $form = $('<form></form>');
+
+    for (var i = 0; i < jsonQuestion.answers.length; i++) {
+        var _answer = loadAnswer(jsonQuestion.answers[i].id);     
+
+        var $checkbox = $('<input>').attr({
+                                        type: 'checkbox', 
+                                        name: jsonQuestion.id, 
+                                        value: _answer.id
+                                      })
+        
+        $checkbox.append(_answer.text);
+        $form.append($checkbox);
+    }
+
+    $(_div).append('<h4>' + jsonQuestion.text + '</h4>');
+    $(_div).append($form);
+
+    return _div;
 }
 
 function textInputAnswerQuestionCreator(jsonQuestion) {
+    var _div = (document.createElement('div'));
+    var $form = $('<form></form>');
+    var $text = $('<input>').attr({
+                                    type: 'text', 
+                                    name: jsonQuestion.id, 
+                                    })
     
+    $form.append($text);
+    $(_div).append('<h4>' + jsonQuestion.text + '</h4>');
+    $(_div).append($form);
+    
+    return _div;
 }
 
 function createQuestionTemplate() {
