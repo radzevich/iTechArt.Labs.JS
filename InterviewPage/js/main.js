@@ -41,7 +41,7 @@ $(document).ready(function() {
     createQuestionTemplate.call(loadQuestion(0));
 }); 
 
-function singleAnswerQuestionCreator(jsonQuestion) {
+function createQuestionWithSingleAnswer(jsonQuestion) {
     var _div = (document.createElement('div'));
     var $form = $('<form></form>');
 
@@ -64,7 +64,7 @@ function singleAnswerQuestionCreator(jsonQuestion) {
     return _div;
 }
 
-function polyAnswerQuestionCreator(jsonQuestion) {
+function createQuestionWithMultyAnswer(jsonQuestion) {
     var _div = (document.createElement('div'));
     var $form = $('<form></form>');
 
@@ -87,7 +87,7 @@ function polyAnswerQuestionCreator(jsonQuestion) {
     return _div;
 }
 
-function textInputAnswerQuestionCreator(jsonQuestion) {
+function createQuestionWithTextAnswer(jsonQuestion) {
     var _div = (document.createElement('div'));
     var $form = $('<form></form>');
     var $text = $('<input>').attr({
@@ -104,9 +104,9 @@ function textInputAnswerQuestionCreator(jsonQuestion) {
 
 function createQuestionTemplate() {
     var questionTemplateCreators = [
-        singleAnswerQuestionCreator,
-        polyAnswerQuestionCreator,
-        textInputAnswerQuestionCreator
+        createQuestionWithSingleAnswer,
+        createQuestionWithMultyAnswer,
+        createQuestionWithTextAnswer
     ]
 
     questionTemplateCreators[this.typeId](this);
