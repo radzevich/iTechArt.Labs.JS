@@ -1,0 +1,38 @@
+ul {
+    list-style: none;
+}
+
+.header {
+    width: 100%;
+    height: 70px;
+}
+
+.content {
+    display: flex;
+}
+
+.operation-field {
+    margin: 30px 20px 0;
+}
+
+.input-form {
+    float: left;
+    box-sizing: border-box;
+}
+
+.button {
+    display: inline-block;
+    padding: 3px 5px;
+}
+
+.input-form .form__button {
+    margin-top: 5px;
+}
+
+.array-display {
+    display: inline-block;
+}
+
+.array-display .array-display__header {
+    margin: 0;
+}
