@@ -1,69 +1,37 @@
-var jsonQuestion = {
-    id: 0,
-    typeId: 0,
-    text: "В чём сила?",
-    answers: [
-        {id: 0},
-        {id: 1},
-        {id: 2},
-        {id: 3}
-    ]
-}
+(function () {
+    var repository = new Repository();
+    var $ul = createUnorderedListOfQuestions(repository.loadQuestion());
 
-var answers = [
-    {
-        id: 0,
-        questionId: 0,
-        text: "В ньютонах"
-    }, 
-    {
-        id: 1,
-        questionId: 0,
-        text: "В амперах"
-    },
-    {
-        id: 2,
-        questionId: 0,
-        text: "В кольце власти"
-    },
-    {
-        id: 3,
-        questionId: 0,
-        text: ", Брат"
-    }
-]
+    displayQuestionsOnPage('.page__content', $ul);
 
-$(document).ready(function() {
-    // show('.page__list', '<p>Some text1</p>');
-    // show('.page__list', '<p>Some text2</p>');
-    // show('.page__list', '<p>Some text3</p>');
+    function createUnorderedListOfQuestions(questions) {
+        var factory = new QuestionVisualElementFactory();
+        var $ul = $('<ul></ul>');
 
-    createQuestionTemplate.call(loadQuestion(0));
-}); 
+        for (var i = 0; i < questions.length; i++) {
+            var questionCreator = factory.getCreator(questions[i].typeId);
+            var question = questionCreator.create(questions[i]);
 
-function loadQuestion(id) {
-    //TODO: getting question with pointed @id.
-    return jsonQuestion;
-}
-
-function loadAnswer(id) {
-    for (var i = 0; i < answers.length; i++) {
-        if (answers[i].id === id) {
-            return answers[i];
+            addItemToList($ul, $(question).html());
         }
-    }
-    return null;
-}
 
-function convertToListItem(stringToConvert) {
-    return '<li>' + stringToConvert + '</li>'; 
-}
-
-function show(displayContext, contentToShow) {
-    if ($(displayContext).has("li").length !== 0) {
-        $(displayContext).append('<hr>');
+        return $ul;
     }
 
-    $(displayContext).append(convertToListItem(contentToShow))
-                     .css('listStyleType', 'none');
-}
+    function convertToListItem(stringToConvert) {
+        return '<li>' + stringToConvert + '</li>'; 
+    }
+
+    function addItemToList(list, item) {
+        if ($(list).has("li").length !== 0) {
+            $(list).append('<hr>');
+        }
+
+        $(list).append(convertToListItem(item))
+                        .css('listStyleType', 'none');
+    }
+
+    function displayQuestionsOnPage(page, $element) {
+        $element.appendTo(page);
+    }
+})();

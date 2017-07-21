@@ -1,8 +1,58 @@
+
+// function TestDataForMiniJsLibrary() {
+//     this.arrayWithIntegerValues = [1,2,3 ];
+
+
+
+// }
+
+
+
+
+// (function(){
+
+// var testData = new TestDataForMiniJsLibrary();
+// var tests = new TestsForMiniJsLibrary(testData);
+// var populateTestData = function() {
+// var testData = new TestDataForMiniJsLibrary();
+// testData.array = $('.array').html();
+// };
+// $('.button').on('click', populateTestData);
+// $('.findLastElement').on('click', tests.findLastElement);
+
+// })();
+
+
+(function(){
+    (function initializePageEvents() {
+        
+    })();
+
+})();
+
+
 var Main = function () {
     var _instance = {};
     var _array = [];
 
-    _instance.getArray = function () {
+    $(document).ready(function () {
+        var _displayContext = 'array-display__list_proc';
+        var _event = 'click';
+
+        $('.form__button_value').on(_event, display(_displayContext, onInputButtonClick(insertValue)));
+        $('.form__button_null').on(_event, display(_displayContext, onInputButtonClick(insertNull)));
+        $('.form__button_undefined').on(_event, display(_displayContext, onInputButtonClick(insertUndefined)));
+
+        $('.block__button_for-each').on(_event, display(_displayContext, onForEachButtonClick()));
+        $('.block__button_where').on(_event, display(_displayContext, onWhereButtonClick()));
+        $('.block__button_first').on(_event, display(_displayContext, onFirstButtonClick()));
+        $('.block__button_last').on(_event, display(_displayContext, onLastButtonClick()));
+        $('.block__button_select').on(_event, display(_displayContext, onSelectButtonClick()));
+        $('.block__button_skip').on(_event, display(_displayContext, onSkipButtonClick()));
+        $('.block__button_take').on(_event, display(_displayContext, onTakeButtonClick()));
+    }); 
+
+    function getArray() {
         return _array;
     }
 
@@ -10,7 +60,7 @@ var Main = function () {
         _array.push(this.value);
     }
 
-    _instance.insertValue = function () {
+    function insertValue() {
         var _valueToInput = {
             value: $(".form__text").val()
         } 
@@ -22,7 +72,7 @@ var Main = function () {
         insert.call(_valueToInput);   
     }
 
-    _instance.insertNull = function () {
+    function insertNull() {
         var _valueToInput = {
             value: null
         } 
@@ -30,7 +80,7 @@ var Main = function () {
         insert.call(_valueToInput);   
     }
 
-    _instance.insertUndefined = function () {
+    function insertUndefined() {
         var _valueToInput = {
             value: undefined
         } 
@@ -65,7 +115,7 @@ var Main = function () {
         return _string;
     }
 
-    _instance.display = function (parentElement, objectToDisplay) {
+    function display (parentElement, objectToDisplay) {
         var _displayContext = {
             context: parentElement,
         };
@@ -74,7 +124,12 @@ var Main = function () {
         show.call(_displayContext, objectToString(objectToDisplay));
     }
 
-    _instance.onForEachButtonClick = function () {
+    function onInputButtonClick(callback) {
+        callback();
+        return getArray();
+    }
+
+    function onForEachButtonClick() {
         var _func = function (item) {
             console.log(item * 2);
         };
@@ -82,7 +137,7 @@ var Main = function () {
         CustomArray.forEach(_array, _func);
     }
 
-    _instance.onWhereButtonClick = function () {
+    function onWhereButtonClick() {
         var _func = function (item) {
             return (item >= 10 && item <= 20);
         };
@@ -90,15 +145,15 @@ var Main = function () {
         return CustomArray.where(_array, _func);
     }
 
-    _instance.onFirstButtonClick = function () {
+    function onFirstButtonClick() {
         return CustomArray.first(_array);
     }
 
-    _instance.onLastButtonClick = function () {
+    function onLastButtonClick() {
         return CustomArray.last(_array);
     }
 
-    _instance.onSelectButtonClick = function () {
+    function onSelectButtonClick() {
         var _func = function (item) {
             return item.length;
         };
@@ -106,13 +161,14 @@ var Main = function () {
         return CustomArray.select(_array, _func);
     }
 
-    _instance.onSkipButtonClick = function () {
+    function onSkipButtonClick() {
+        //var _value = $('#skip-block__number-input').val();
         var _value = document.getElementById('skip-block__number-input').value;
 
         return CustomArray.skip(_array, _value);
     }
 
-    _instance.onTakeButtonClick = function () {
+    function onTakeButtonClick() {
         var _value = document.getElementById('take-block__number-input').value;
 
         return CustomArray.take(_array, _value);
@@ -120,3 +176,4 @@ var Main = function () {
 
     return _instance;
 }();
+
