@@ -7,3 +7,7 @@
     padding: 0;
     margin-top: 40px;
 }
+
+.page__header {
+    font-weight: 600;
+}

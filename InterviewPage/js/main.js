@@ -1,11 +1,17 @@
 (function () {
-    var repository = new Repository();
-    var $ul = createUnorderedListOfQuestions(repository.loadQuestion());
+    var unitOfWork = new UnitOfWork();
+    var factory = new QuestionVisualElementFactory(); 
 
-    displayQuestionsOnPage('.page__content', $ul);
+    createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
 
-    function createUnorderedListOfQuestions(questions) {
-        var factory = new QuestionVisualElementFactory();
+    function createPageWithQuestions(questions) {
+        checkIfCurrentRangeIsExtreme();
+
+        var $ul = createUnorderedListOfQuestions(questions);
+        displayQuestionListOnPage('.page__content', questions);
+    };
+
+    function createUnorderedListOfQuestions(questions) { 
         var $ul = $('<ul></ul>');
 
         for (var i = 0; i < questions.length; i++) {
@@ -31,7 +37,32 @@
                         .css('listStyleType', 'none');
     }
 
-    function displayQuestionsOnPage(page, $element) {
-        $element.appendTo(page);
+    function displayQuestionListOnPage(page, questions) {
+        var $ul = createUnorderedListOfQuestions(questions);
+
+        $(page).empty();
+        $ul.appendTo(page);
     }
+
+    function checkIfCurrentRangeIsExtreme () {
+        if (unitOfWork.currentRangeIsFirst()) {
+            $('pager__previous-button').css('display', 'none');
+        }
+        if (unitOfWork.currentRangeIsLast()) {
+            $('pager__next-button').text('Отправить');
+        }
+    }
+
+    function onNextButtonClick(callback) {
+        callback(unitOfWork.getNextRangeOfQuestions());       
+    }
+
+    function onPreviousButtonClick(callback) {
+        callback(unitOfWork.getPreviousRangeOfQuestions());       
+    }
+
+    (function () {
+        $('.pager__next-button').on('click', onNextButtonClick(createPageWithQuestions));
+        $('.pager__previous-button').on('click', onPreviousButtonClick(createPageWithQuestions));
+    })();
 })();
