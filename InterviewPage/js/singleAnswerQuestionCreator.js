@@ -30,12 +30,24 @@ function createSingleAnswerQuestion() {
                 name: name, 
                 id: id 
         });
-        var $label = $("<label>").text(text);
+        var $label = $('<label>').text(text);
+
+        addStylesToRadioButton($radio);
+        addStylesToLabel($label);
 
         $div.append($radio)
             .append($label);
 
         return $div;
+    }
+
+    function addStylesToRadioButton($radioButton) {
+        $radioButton.css('float', 'left');
+    }
+
+    function addStylesToLabel($label) {
+        $label.css('display', 'block');
+        $label.css('marginLeft', '20px');
     }
 
     return self;

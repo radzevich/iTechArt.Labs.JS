@@ -25,17 +25,29 @@ function createMultyAnswerQuestion() {
 
     function createCheckboxWithLabel(name, id, text) {
         var $div = $('<div></div>');
-        var $radio = $('<input>').attr({ 
+        var $checkbox = $('<input>').attr({ 
                 type: 'checkbox',  
                 name: name, 
                 id: id 
         });
         var $label = $("<label>").text(text);
 
-        $div.append($radio)
+        addStylesToCheckbox($checkbox);
+        addStylesToLabel($label);
+
+        $div.append($checkbox)
             .append($label);
 
         return $div;
+    }
+
+    function addStylesToCheckbox($checkbox) {
+        $checkbox.css('float', 'left');
+    }
+
+    function addStylesToLabel($label) {
+        $label.css('display', 'block');
+        $label.css('marginLeft', '20px');
     }
 
     return self;
