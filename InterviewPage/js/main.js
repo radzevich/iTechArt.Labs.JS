@@ -5,10 +5,11 @@
     createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
 
     function createPageWithQuestions(questions) {
-        checkIfCurrentRangeIsExtreme();
-
+        console.log(questions);
         var $ul = createUnorderedListOfQuestions(questions);
+
         displayQuestionListOnPage('.page__content', questions);
+        checkIfCurrentRangeIsExtreme();
     };
 
     function createUnorderedListOfQuestions(questions) { 
@@ -46,7 +47,7 @@
 
     function checkIfCurrentRangeIsExtreme () {
         if (unitOfWork.currentRangeIsFirst()) {
-            $('pager__previous-button').css('display', 'none');
+            $('pager__previous-button').css('display', 'inline');
         }
         if (unitOfWork.currentRangeIsLast()) {
             $('pager__next-button').text('Отправить');
@@ -54,15 +55,21 @@
     }
 
     function onNextButtonClick(callback) {
-        callback(unitOfWork.getNextRangeOfQuestions());       
+        callback(unitOfWork.getNextRangeOfQuestions());    
+        console.log('here0');
     }
 
     function onPreviousButtonClick(callback) {
         callback(unitOfWork.getPreviousRangeOfQuestions());       
+        console.log('here');
     }
 
     (function () {
-        $('.pager__next-button').on('click', onNextButtonClick(createPageWithQuestions));
-        $('.pager__previous-button').on('click', onPreviousButtonClick(createPageWithQuestions));
+        $('.pager__next-button').click(function () {
+            onNextButtonClick(createPageWithQuestions);
+        });
+        $('.pager__previous-button').click(function () {
+            onNextButtonClick(createPageWithQuestions);
+        });
     })();
 })();

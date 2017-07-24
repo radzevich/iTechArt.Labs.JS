@@ -13,6 +13,7 @@ var Iterator = function(arrayLength) {
             }
             
             rangeOfIndexes.endIndex = index;
+            console.log('index ' + index);
 
             return rangeOfIndexes;
         },

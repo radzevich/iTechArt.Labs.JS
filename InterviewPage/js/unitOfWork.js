@@ -4,7 +4,7 @@
  */
 
 var UnitOfWork = function () {
-    const NUMBER_OF_QUESTIONS_ON_THE_PAGE = 10;
+    const NUMBER_OF_QUESTIONS_ON_THE_PAGE = 4;
 
     var repository = new Repository();
     var questions = repository.loadQuestion();
@@ -14,21 +14,22 @@ var UnitOfWork = function () {
         getNextRangeOfQuestions: function () {
             rangeOfIndexes = iterator.getNextRange(NUMBER_OF_QUESTIONS_ON_THE_PAGE);
 
-            return questions.slice(rangeOfIndexes.start, rangeOfIndexes.end);
+            return questions.slice(rangeOfIndexes.startIdex, rangeOfIndexes.endIndex);
         },
 
         getPreviousRangeOfQuestions: function () {
             rangeOfIndexes = iterator.getPreviousRange(NUMBER_OF_QUESTIONS_ON_THE_PAGE);
 
-            return questions.slice(rangeOfIndexes.start, rangeOfIndexes.end);
+            return questions.slice(rangeOfIndexes.startIdex, rangeOfIndexes.endIndex);
         },
 
         currentRangeIsFirst: function () {
-            return iterator.getCurrentRange().start === 0;
+            return iterator.getCurrentRange().startIndex === 0;
         },
 
         currentRangeIsLast: function () {
-            return iterator.getCurrentRange().end === questions.length;
+            console.log(iterator.getCurrentRange().endIndex);
+            return iterator.getCurrentRange().endIndex === questions.length;
         },
 
         getAnswersToTheQuestion: function (question) {

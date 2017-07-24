@@ -5,7 +5,7 @@ Repository.prototype.loadQuestion = function () {
     {
         id: 0,
         typeId: 0,
-        text: 'В чём сила?',
+        text: '0В чём сила?',
         answers: [
             {id: 0},
             {id: 1},
@@ -16,7 +16,7 @@ Repository.prototype.loadQuestion = function () {
     {
         id: 0,
         typeId: 1,
-        text: 'В чём сила?',
+        text: '1В чём сила?',
         answers: [
             {id: 0},
             {id: 1},
@@ -27,7 +27,117 @@ Repository.prototype.loadQuestion = function () {
     {
         id: 0,
         typeId: 2,
-        text: 'В чём сила?',
+        text: '2В чём сила?',
+        answers: [
+            {id: 0},
+            {id: 1},
+            {id: 2},
+            {id: 3}
+        ]
+    },
+    {
+        id: 0,
+        typeId: 0,
+        text: '3В чём сила?',
+        answers: [
+            {id: 0},
+            {id: 1},
+            {id: 2},
+            {id: 3}
+        ]
+    },
+    {
+        id: 0,
+        typeId: 1,
+        text: '4В чём сила?',
+        answers: [
+            {id: 0},
+            {id: 1},
+            {id: 2},
+            {id: 3}
+        ]
+    },
+    {
+        id: 0,
+        typeId: 2,
+        text: '5В чём сила?',
+        answers: [
+            {id: 0},
+            {id: 1},
+            {id: 2},
+            {id: 3}
+        ]
+    },
+    {
+        id: 0,
+        typeId: 0,
+        text: '6В чём сила?',
+        answers: [
+            {id: 0},
+            {id: 1},
+            {id: 2},
+            {id: 3}
+        ]
+    },
+    {
+        id: 0,
+        typeId: 1,
+        text: '7В чём сила?',
+        answers: [
+            {id: 0},
+            {id: 1},
+            {id: 2},
+            {id: 3}
+        ]
+    },
+    {
+        id: 0,
+        typeId: 2,
+        text: '8В чём сила?',
+        answers: [
+            {id: 0},
+            {id: 1},
+            {id: 2},
+            {id: 3}
+        ]
+    },
+    {
+        id: 0,
+        typeId: 0,
+        text: '9В чём сила?',
+        answers: [
+            {id: 0},
+            {id: 1},
+            {id: 2},
+            {id: 3}
+        ]
+    },
+    {
+        id: 0,
+        typeId: 1,
+        text: '10В чём сила?',
+        answers: [
+            {id: 0},
+            {id: 1},
+            {id: 2},
+            {id: 3}
+        ]
+    },
+    {
+        id: 0,
+        typeId: 2,
+        text: '11В чём сила?',
+        answers: [
+            {id: 0},
+            {id: 1},
+            {id: 2},
+            {id: 3}
+        ]
+    },
+    {
+        id: 0,
+        typeId: 0,
+        text: '12В чём сила?',
         answers: [
             {id: 0},
             {id: 1},
