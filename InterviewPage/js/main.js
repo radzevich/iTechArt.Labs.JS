@@ -2,10 +2,10 @@
     var unitOfWork = new UnitOfWork();
     var factory = new QuestionVisualElementFactory(); 
 
-    createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
+    // createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
+    onPageNavigationButtonClick(unitOfWork.getNextRangeOfQuestions());
 
     function createPageWithQuestions(questions) {
-        console.log(questions);
         var $ul = createUnorderedListOfQuestions(questions);
 
         displayQuestionListOnPage('.page__content', $ul);
@@ -49,26 +49,38 @@
     function checkIfCurrentRangeIsExtreme () {
         if (!unitOfWork.currentRangeIsFirst()) {
             $('.pager__previous-button').css('display', 'inline');
+            return;
         }
         if (unitOfWork.currentRangeIsLast()) {
             $('.pager__next-button').text('Отправить');
+            return;
         }
+        //createPageWithQuestions(getRangeOfQuestionsFunction().call(this));
     }
 
-    function onNextButtonClick(callback) {
-        callback(unitOfWork.getNextRangeOfQuestions());    
+    function onPageNavigationButtonClick(questions) {
+        if (unitOfWork.currentRangeIsFirst()) {
+            $('.pager__previous-button').css('display', 'none');
+        }
+        if (unitOfWork.currentRangeIsLast()) {
+            $('.pager__next-button').text('Отправить');
+        } else {
+            $('.pager__next-button').text('Далее');
+        }
+        
+        createPageWithQuestions(questions);
     }
 
-    function onPreviousButtonClick(callback) {
+    function onPreviousButtonClick() {
         callback(unitOfWork.getPreviousRangeOfQuestions());       
     }
 
     (function () {
         $('.pager__next-button').click(function () {
-            onNextButtonClick(createPageWithQuestions);
+            onPageNavigationButtonClick(unitOfWork.getNextRangeOfQuestions());
         });
         $('.pager__previous-button').click(function () {
-            onNextButtonClick(createPageWithQuestions);
+            onPageNavigationButtonClick(unitOfWork.getPreviousRangeOfQuestions());
         });
     })();
 })();

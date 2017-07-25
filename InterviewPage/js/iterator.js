@@ -19,9 +19,13 @@ var Iterator = function(arrayLength) {
 
         getPreviousRange: function (step) {
             rangeOfIndexes = { endIndex: index };
-
+            
             if (index - step >= 0) {
-                index -= step;
+                if (index % step === 0) {
+                    index -= step;
+                } else {
+                    index -= index % step;
+                }
             } else {
                 index = 0;
             }

@@ -18,25 +18,17 @@ var UnitOfWork = function () {
         },
 
         getPreviousRangeOfQuestions: function () {
+            var rangeOfIndexes = iterator.getPreviousRange(NUMBER_OF_QUESTIONS_ON_THE_PAGE);
 
             return questions.slice(rangeOfIndexes.startIndex, rangeOfIndexes.endIndex);
         },
 
-        getFirstIndex: function () {
-            return iterator.getCurrentRange().startIndex;
-        },
-
-        getLastIndex: function () {
-            return iterator.getCurrentRange().endIndex;
-        },
-
         currentRangeIsFirst: function () {
-            console.log(this.getFirstIndex());
-            return this.getFirstIndex() === 0;
+            return iterator.getCurrentRange().startIndex === 0;
         },
 
         currentRangeIsLast: function () {
-            return this.getLastIndex() === questions.length;
+            return iterator.getCurrentRange().endIndex === questions.length;
         },
 
         getAnswersToTheQuestion: function (question) {
