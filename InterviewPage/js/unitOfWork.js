@@ -7,8 +7,10 @@ var UnitOfWork = function () {
     const NUMBER_OF_QUESTIONS_ON_THE_PAGE = 4;
 
     var repository = new Repository();
-    var questions = repository.loadQuestion();
+    var questions = repository.getQuestions();
     var iterator = new Iterator(questions.length);
+
+    
 
     return {
         getNextRangeOfQuestions: function () {
@@ -35,7 +37,7 @@ var UnitOfWork = function () {
             var answers = [];
 
             for (var i = 0; i < question.answers.length; i++) {
-                answers.push(repository.loadAnswer(question.answers[i]))
+                answers.push(repository.getAnswer(question.answers[i].id))
             }
 
             return answers;

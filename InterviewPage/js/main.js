@@ -1,5 +1,5 @@
 (function () {
-    var unitOfWork = new UnitOfWork();
+    this.unitOfWork = new UnitOfWork();
     var factory = new QuestionVisualElementFactory(); 
 
     // createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
@@ -55,7 +55,6 @@
             $('.pager__next-button').text('Отправить');
             return;
         }
-        //createPageWithQuestions(getRangeOfQuestionsFunction().call(this));
     }
 
     function onPageNavigationButtonClick(questions) {
@@ -69,10 +68,6 @@
         }
         
         createPageWithQuestions(questions);
-    }
-
-    function onPreviousButtonClick() {
-        callback(unitOfWork.getPreviousRangeOfQuestions());       
     }
 
     (function () {

@@ -2,18 +2,16 @@ function createSingleAnswerQuestion() {
     var self = {};
 
     self.create = function (questionInfo) {
-        var repository = new Repository();
-
         var div = (document.createElement('div')); 
         var $form = $('<form></form>'); 
 
-        for (var i = 0; i < questionInfo.answers.length; i++) { 
-            var answer = repository.loadAnswer(questionInfo.answers[i].id); 
+        var answers = window.unitOfWork.getAnswersToTheQuestion(questionInfo); 
 
+        for (var i = 0; i < answers.length; i++) {       
             $form.append(createRadioButtonWithLabel(
-                answer.questionId, 
-                answer.id, 
-                answer.text
+                answers[i].questionId, 
+                answers[i].id, 
+                answers[i].text
             )); 
         }
 
