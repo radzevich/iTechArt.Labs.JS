@@ -2,14 +2,13 @@
     this.unitOfWork = new UnitOfWork();
     var factory = new QuestionVisualElementFactory(); 
 
-    // createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
-    onPageNavigationButtonClick(unitOfWork.getNextRangeOfQuestions());
+    createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
 
     function createPageWithQuestions(questions) {
         var $ul = createUnorderedListOfQuestions(questions);
 
-        displayQuestionListOnPage('.page__content', $ul);
         checkIfCurrentRangeIsExtreme();
+        displayQuestionListOnPage('.page__content', $ul);
     };
 
     function createUnorderedListOfQuestions(questions) { 
@@ -47,35 +46,40 @@
     }
 
     function checkIfCurrentRangeIsExtreme () {
-        if (!unitOfWork.currentRangeIsFirst()) {
-            $('.pager__previous-button').css('display', 'inline');
-            return;
-        }
-        if (unitOfWork.currentRangeIsLast()) {
-            $('.pager__next-button').text('Отправить');
-            return;
-        }
-    }
-
-    function onPageNavigationButtonClick(questions) {
         if (unitOfWork.currentRangeIsFirst()) {
             $('.pager__previous-button').css('display', 'none');
+        } else {
+            $('.pager__previous-button').css('display', 'inline');
         }
         if (unitOfWork.currentRangeIsLast()) {
             $('.pager__next-button').text('Отправить');
         } else {
             $('.pager__next-button').text('Далее');
         }
-        
-        createPageWithQuestions(questions);
+    }
+
+    function saveValuesFromForm() {
+        $('.form input').each(
+            function (index){  
+                var input = $(this);
+
+                unitOfWork.update(
+                    input.attr('name'),
+                    input.attr('id'),
+                    // In case input is text it's attribute "value" will be defined,
+                    // in other way attribute "checked" will.
+                    (input.attr('value') !== undefined) ? input.attr('value') : input.attr('checked')
+                )
+            }
+        );
     }
 
     (function () {
         $('.pager__next-button').click(function () {
-            onPageNavigationButtonClick(unitOfWork.getNextRangeOfQuestions());
+            createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
         });
         $('.pager__previous-button').click(function () {
-            onPageNavigationButtonClick(unitOfWork.getPreviousRangeOfQuestions());
+            createPageWithQuestions(unitOfWork.getPreviousRangeOfQuestions());
         });
     })();
 })();

@@ -3,14 +3,14 @@ function createSingleAnswerQuestion() {
 
     self.create = function (question, answers) {
         var div = (document.createElement('div')); 
-        var $form = $('<form></form>'); 
+        var $form = $('<form class="form"></form>'); 
 
         for (var key in question.answers) {
             $form.append(createRadioButtonWithLabel(
                 question.id,
                 answers[key].id, 
                 answers[key].text,
-                question.answers[key].stateValue,
+                question.answers[key],
             )); 
         }
 
@@ -20,11 +20,11 @@ function createSingleAnswerQuestion() {
         return div; 
     };
     
-    function createRadioButtonWithLabel(name, id, text, isChecked) {
+    function createRadioButtonWithLabel(parentId, id, text, isChecked) {
         var $div = $('<div></div>');
         var $radio = $('<input>').attr({ 
                 type: 'radio',  
-                name: name, 
+                name: parentId, 
                 id: id,
                 checked: !!isChecked
         });

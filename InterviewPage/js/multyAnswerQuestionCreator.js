@@ -3,14 +3,14 @@ function createMultyAnswerQuestion() {
 
     self.create = function (question, answers) {
         var div = (document.createElement('div')); 
-        var $form = $('<form></form>'); 
+        var $form = $('<form class="form"></form>'); 
 
         for (var key in question.answers) {
             $form.append(createCheckboxWithLabel(
                 question.id,
                 answers[key].id, 
                 answers[key].text,
-                question.answers[key].stateValue,
+                question.answers[key],
             )); 
         }
 
@@ -20,11 +20,11 @@ function createMultyAnswerQuestion() {
         return div; 
     };
 
-    function createCheckboxWithLabel(name, id, text, isChecked) {
+    function createCheckboxWithLabel(parentId, id, text, isChecked) {
         var $div = $('<div></div>');
         var $checkbox = $('<input>').attr({ 
                 type: 'checkbox',  
-                name: name, 
+                name: parentId, 
                 id: id,
                 checked: !!isChecked,
         });

@@ -37,13 +37,17 @@ var UnitOfWork = function () {
             for (var id in question.answers) {
                 answers[id] = repository.getAnswerById(id);
             }
-            
+
             return answers;
         },
 
         getQuestionsCount: function () {
             return questions.length;
-        }
+        },
+
+        updateQuastionByAnswer: function () {
+            
+        },
     }
 }
  

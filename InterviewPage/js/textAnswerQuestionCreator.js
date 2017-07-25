@@ -3,11 +3,11 @@ function textAnswerQuestion() {
 
     self.create = function (question) {
         var _div = (document.createElement('div')); 
-        var $form = $('<form></form>'); 
+        var $form = $('<form class="form"></form>'); 
         var $text = $('<input>').attr({ 
             type: 'text', 
             name: question.id,  
-            value: question.answers[0].stateValue,
+            value: question.answers[0],
         }) 
 
         $form.append($text); 

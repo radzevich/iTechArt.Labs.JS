@@ -4,10 +4,10 @@ function Repository() {
 
     (function markQuestionsAsClean(questions, answers) {
         for (var i = 0; i < questions.length; i++) {
-            var answers = questions[i].answers;
+            var answerList = questions[i].answers;
 
-            for (var j = 0; j < answers.length; j++) {
-                answers[j].stateValue = '';
+            for (var id in answerList) {
+                answerList[id] = '';
             }
         }
     })(questions);
@@ -28,7 +28,7 @@ function Repository() {
         {
             id: 0,
             typeId: 0,
-            text: '0В чём сила?',
+            text: '0 В чём сила?',
             answers: [
                 {0: ''},
                 {1: ''},
@@ -39,7 +39,7 @@ function Repository() {
         {
             id: 0,
             typeId: 1,
-            text: '1В чём сила?',
+            text: '1 В чём сила?',
             answers: [
                 {0: ''},
                 {1: ''},
@@ -50,14 +50,147 @@ function Repository() {
         {
             id: 0,
             typeId: 2,
-            text: '2В чём сила?',
+            text: '2 В чём сила?',
             answers: [
                 {0: ''},
                 {1: ''},
                 {2: ''},
                 {3: ''},
             ]
-        }];
+        },
+        {
+            id: 0,
+            typeId: 0,
+            text: '3 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        {
+            id: 0,
+            typeId: 1,
+            text: '4 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        {
+            id: 0,
+            typeId: 2,
+            text: '5 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        {
+            id: 0,
+            typeId: 0,
+            text: '6 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        {
+            id: 0,
+            typeId: 1,
+            text: '7 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        {
+            id: 0,
+            typeId: 2,
+            text: '8 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        {
+            id: 0,
+            typeId: 0,
+            text: '9 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        {
+            id: 0,
+            typeId: 1,
+            text: '10 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        {
+            id: 0,
+            typeId: 2,
+            text: '11 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        {
+            id: 0,
+            typeId: 0,
+            text: '12 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        {
+            id: 0,
+            typeId: 1,
+            text: '13 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        {
+            id: 0,
+            typeId: 2,
+            text: '14 В чём сила?',
+            answers: [
+                {0: ''},
+                {1: ''},
+                {2: ''},
+                {3: ''},
+            ]
+        },
+        ];
     }
 
     function loadAnswers() {
