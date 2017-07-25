@@ -17,7 +17,7 @@
 
         for (var i = 0; i < questions.length; i++) {
             var questionCreator = factory.getCreator(questions[i].typeId);
-            var question = questionCreator.create(questions[i]);
+            var question = questionCreator.create(questions[i], unitOfWork.getAnswersToTheQuestion(questions[i]));
 
             addItemToList($ul, $(question).html());
         }
@@ -79,3 +79,4 @@
         });
     })();
 })();
+

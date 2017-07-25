@@ -8,9 +8,7 @@ var UnitOfWork = function () {
 
     var repository = new Repository();
     var questions = repository.getQuestions();
-    var iterator = new Iterator(questions.length);
-
-    
+    var iterator = new Iterator(questions.length);    
 
     return {
         getNextRangeOfQuestions: function () {
@@ -34,12 +32,12 @@ var UnitOfWork = function () {
         },
 
         getAnswersToTheQuestion: function (question) {
-            var answers = [];
+            var answers = {};
 
-            for (var i = 0; i < question.answers.length; i++) {
-                answers.push(repository.getAnswer(question.answers[i].id))
+            for (var id in question.answers) {
+                answers[id] = repository.getAnswerById(id);
             }
-
+            
             return answers;
         },
 

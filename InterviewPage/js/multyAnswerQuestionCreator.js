@@ -1,22 +1,20 @@
 function createMultyAnswerQuestion() {
     var self = {};
 
-    self.create = function (questionInfo) {
+    self.create = function (question, answers) {
         var div = (document.createElement('div')); 
         var $form = $('<form></form>'); 
 
-        var answers = window.unitOfWork.getAnswersToTheQuestion(questionInfo); 
-
-        for (var i = 0; i < answers.length; i++) { 
+        for (var key in question.answers) {
             $form.append(createCheckboxWithLabel(
-                answers[i].questionId, 
-                answers[i].id, 
-                answers[i].text,
-                answers[i].updatedValue,
+                question.id,
+                answers[key].id, 
+                answers[key].text,
+                question.answers[key].stateValue,
             )); 
         }
 
-        $(div).append('<h4>' + questionInfo.text + '</h4>');  
+        $(div).append('<h4>' + question.text + '</h4>');  
         $(div).append($form);
 
         return div; 
