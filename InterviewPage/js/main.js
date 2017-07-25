@@ -8,7 +8,7 @@
         console.log(questions);
         var $ul = createUnorderedListOfQuestions(questions);
 
-        displayQuestionListOnPage('.page__content', questions);
+        displayQuestionListOnPage('.page__content', $ul);
         checkIfCurrentRangeIsExtreme();
     };
 
@@ -38,11 +38,12 @@
                         .css('listStyleType', 'none');
     }
 
-    function displayQuestionListOnPage(page, questions) {
-        var $ul = createUnorderedListOfQuestions(questions);
+    function displayQuestionListOnPage(page, questionList) {
+        if (!$(page).is(':empty')) {
+            $(page).children().remove();
+        }
 
-        $(page).empty();
-        $ul.appendTo(page);
+        questionList.appendTo(page);
     }
 
     function checkIfCurrentRangeIsExtreme () {
@@ -56,12 +57,10 @@
 
     function onNextButtonClick(callback) {
         callback(unitOfWork.getNextRangeOfQuestions());    
-        console.log('here0');
     }
 
     function onPreviousButtonClick(callback) {
         callback(unitOfWork.getPreviousRangeOfQuestions());       
-        console.log('here');
     }
 
     (function () {

@@ -12,24 +12,31 @@ var UnitOfWork = function () {
 
     return {
         getNextRangeOfQuestions: function () {
-            rangeOfIndexes = iterator.getNextRange(NUMBER_OF_QUESTIONS_ON_THE_PAGE);
+            var rangeOfIndexes = iterator.getNextRange(NUMBER_OF_QUESTIONS_ON_THE_PAGE);
 
-            return questions.slice(rangeOfIndexes.startIdex, rangeOfIndexes.endIndex);
+            return questions.slice(rangeOfIndexes.startIndex, rangeOfIndexes.endIndex);
         },
 
         getPreviousRangeOfQuestions: function () {
-            rangeOfIndexes = iterator.getPreviousRange(NUMBER_OF_QUESTIONS_ON_THE_PAGE);
+            var rangeOfIndexes = iterator.getPreviousRange(NUMBER_OF_QUESTIONS_ON_THE_PAGE);
 
-            return questions.slice(rangeOfIndexes.startIdex, rangeOfIndexes.endIndex);
+            return questions.slice(rangeOfIndexes.startIndex, rangeOfIndexes.endIndex);
+        },
+
+        getFirstIndex: function () {
+            return iterator.getCurrentRange().startIdex;
+        },
+
+        getLastIndex: function () {
+            return iterator.getCurrentRange().endIdex;
         },
 
         currentRangeIsFirst: function () {
-            return iterator.getCurrentRange().startIndex === 0;
+            return this.getFirstIndex() === 0;
         },
 
         currentRangeIsLast: function () {
-            console.log(iterator.getCurrentRange().endIndex);
-            return iterator.getCurrentRange().endIndex === questions.length;
+            return this.getLastIndex() === questions.length;
         },
 
         getAnswersToTheQuestion: function (question) {
