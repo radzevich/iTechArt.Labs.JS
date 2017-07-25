@@ -47,11 +47,11 @@
     }
 
     function checkIfCurrentRangeIsExtreme () {
-        if (unitOfWork.currentRangeIsFirst()) {
-            $('pager__previous-button').css('display', 'inline');
+        if (!unitOfWork.currentRangeIsFirst()) {
+            $('.pager__previous-button').css('display', 'inline');
         }
         if (unitOfWork.currentRangeIsLast()) {
-            $('pager__next-button').text('Отправить');
+            $('.pager__next-button').text('Отправить');
         }
     }
 

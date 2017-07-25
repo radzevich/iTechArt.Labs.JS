@@ -14,7 +14,6 @@ var Iterator = function(arrayLength) {
             
             rangeOfIndexes.endIndex = index;
 
-            console.log(rangeOfIndexes);
             return rangeOfIndexes;
         },
 

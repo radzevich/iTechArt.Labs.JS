@@ -18,20 +18,20 @@ var UnitOfWork = function () {
         },
 
         getPreviousRangeOfQuestions: function () {
-            var rangeOfIndexes = iterator.getPreviousRange(NUMBER_OF_QUESTIONS_ON_THE_PAGE);
 
             return questions.slice(rangeOfIndexes.startIndex, rangeOfIndexes.endIndex);
         },
 
         getFirstIndex: function () {
-            return iterator.getCurrentRange().startIdex;
+            return iterator.getCurrentRange().startIndex;
         },
 
         getLastIndex: function () {
-            return iterator.getCurrentRange().endIdex;
+            return iterator.getCurrentRange().endIndex;
         },
 
         currentRangeIsFirst: function () {
+            console.log(this.getFirstIndex());
             return this.getFirstIndex() === 0;
         },
 
