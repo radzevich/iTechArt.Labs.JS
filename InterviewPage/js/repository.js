@@ -1,6 +1,6 @@
 function Repository() {
     var questions = loadQuestions();
-    var answers = loadAnswers();
+    var answers = transformArrayToKeyList(loadAnswers());
 
     (function markQuestionsAsClean(questions, answers) {
         for (var i = 0; i < questions.length; i++) {
@@ -11,6 +11,17 @@ function Repository() {
             }
         }
     })(questions);
+
+    function transformArrayToKeyList(arrayOfAnswers) {
+        var keyList = {};
+
+        for (var i = 0; i < arrayOfAnswers.length; i++) {
+            var answer = arrayOfAnswers[i];
+            keyList[answer.id] = answer;
+        }
+
+        return keyList;
+    }
 
     function loadQuestions() {
         return [
@@ -79,13 +90,7 @@ function Repository() {
         },
 
         getAnswerById: function (id) {
-            for (var i = 0; i < answers.length; i++) {
-
-                if (answers[i].id == id) {
-                    return answers[i];
-                }
-            }
-            return null;
+            return answers[id];
         },
 
         updateQuastionByAnswer: function(quastion, answerId, answerValue) {
