@@ -11,7 +11,8 @@ function createMultyAnswerQuestion() {
             $form.append(createCheckboxWithLabel(
                 answers[i].questionId, 
                 answers[i].id, 
-                answers[i].text
+                answers[i].text,
+                answers[i].updatedValue,
             )); 
         }
 
@@ -21,12 +22,13 @@ function createMultyAnswerQuestion() {
         return div; 
     };
 
-    function createCheckboxWithLabel(name, id, text) {
+    function createCheckboxWithLabel(name, id, text, isChecked) {
         var $div = $('<div></div>');
         var $checkbox = $('<input>').attr({ 
                 type: 'checkbox',  
                 name: name, 
-                id: id 
+                id: id,
+                checked: !!isChecked,
         });
         var $label = $("<label>").text(text);
 

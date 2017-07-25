@@ -11,7 +11,8 @@ function createSingleAnswerQuestion() {
             $form.append(createRadioButtonWithLabel(
                 answers[i].questionId, 
                 answers[i].id, 
-                answers[i].text
+                answers[i].text,
+                answers[i].updatedValue
             )); 
         }
 
@@ -21,13 +22,15 @@ function createSingleAnswerQuestion() {
         return div; 
     };
     
-    function createRadioButtonWithLabel(name, id, text) {
+    function createRadioButtonWithLabel(name, id, text, isChecked) {
         var $div = $('<div></div>');
         var $radio = $('<input>').attr({ 
                 type: 'radio',  
                 name: name, 
-                id: id 
+                id: id,
+                checked: !!isChecked
         });
+
         var $label = $('<label>').text(text);
 
         addStylesToRadioButton($radio);

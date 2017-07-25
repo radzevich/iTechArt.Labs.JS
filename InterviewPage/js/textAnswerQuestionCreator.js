@@ -7,6 +7,7 @@ function textAnswerQuestion() {
         var $text = $('<input>').attr({ 
             type: 'text', 
             name: questionInfo.id,  
+            value: 'saf'
         }) 
 
         $form.append($text); 

@@ -1,6 +1,12 @@
 function Repository() {
     var answers = loadAnswers();
 
+    (function markAnswersAsClean(answers) {
+        for (var i = 0; i < answers.length; i++) {
+            answers[i].updatedValue = '';
+        }
+    })(answers);
+
     function getAnswerById(id) {
         for (var i = 0; i < answers.length; i++) {
             if (answers[i].id === id) {
@@ -190,8 +196,8 @@ function Repository() {
             return getAnswerById(id);
         },
 
-        updateAnswer: function(id, value) {
-            getAnswerById(id).updatedValue = value;
+        updateAnswer: function(answer, value) {
+            answer.updatedValue = value;
         }
     }
 }
