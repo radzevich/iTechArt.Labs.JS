@@ -6,7 +6,6 @@ function createSingleAnswerQuestion() {
         var $form = $('<form class="form"></form>'); 
 
         for (var key in question.answers) {
-            console.log(key);
             $form.append(createRadioButtonWithLabel(
                 question.id,
                 answers[key].id, 

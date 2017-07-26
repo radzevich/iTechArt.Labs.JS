@@ -37,7 +37,7 @@ function Repository() {
             ]
         },
         {
-            id: 0,
+            id: 1,
             typeId: 1,
             text: '1 В чём сила?',
             answers: [
@@ -48,7 +48,7 @@ function Repository() {
             ]
         },
         {
-            id: 0,
+            id: 2,
             typeId: 2,
             text: '2 В чём сила?',
             answers: [
@@ -59,7 +59,7 @@ function Repository() {
             ]
         },
         {
-            id: 0,
+            id: 3,
             typeId: 0,
             text: '3 В чём сила?',
             answers: [
@@ -70,7 +70,7 @@ function Repository() {
             ]
         },
         {
-            id: 0,
+            id: 4,
             typeId: 1,
             text: '4 В чём сила?',
             answers: [
@@ -81,7 +81,7 @@ function Repository() {
             ]
         },
         {
-            id: 0,
+            id: 5,
             typeId: 2,
             text: '5 В чём сила?',
             answers: [
@@ -92,7 +92,7 @@ function Repository() {
             ]
         },
         {
-            id: 0,
+            id: 6,
             typeId: 0,
             text: '6 В чём сила?',
             answers: [
@@ -103,86 +103,9 @@ function Repository() {
             ]
         },
         {
-            id: 0,
+            id: 7,
             typeId: 1,
             text: '7 В чём сила?',
-            answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
-            ]
-        },
-        {
-            id: 0,
-            typeId: 2,
-            text: '8 В чём сила?',
-            answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
-            ]
-        },
-        {
-            id: 0,
-            typeId: 0,
-            text: '9 В чём сила?',
-            answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
-            ]
-        },
-        {
-            id: 0,
-            typeId: 1,
-            text: '10 В чём сила?',
-            answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
-            ]
-        },
-        {
-            id: 0,
-            typeId: 2,
-            text: '11 В чём сила?',
-            answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
-            ]
-        },
-        {
-            id: 0,
-            typeId: 0,
-            text: '12 В чём сила?',
-            answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
-            ]
-        },
-        {
-            id: 0,
-            typeId: 1,
-            text: '13 В чём сила?',
-            answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
-            ]
-        },
-        {
-            id: 0,
-            typeId: 2,
-            text: '14 В чём сила?',
             answers: [
                 {0: ''},
                 {1: ''},
@@ -197,24 +120,21 @@ function Repository() {
         return [
         {
             id: 0,
-            questionId: 0,
             text: 'В ньютонах'
         }, 
         {
             id: 1,
-            questionId: 0,
             text: 'В амперах'
         },
         {
             id: 2,
-            questionId: 0,
             text: 'В кольце власти'
         },
         {
             id: 3,
-            questionId: 0,
             text: ', Брат'
-        }];
+        },
+        ];
     }
 
     return {

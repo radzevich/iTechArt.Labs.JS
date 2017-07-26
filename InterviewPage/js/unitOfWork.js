@@ -14,9 +14,9 @@ var UnitOfWork = function () {
         for (var i = 0; i < questions.length; i++) {
             if (questions[i].id == id) {
                 return questions[i];
-            }
-            return null;
+            } 
         }
+        return null;
     };
 
     return {
@@ -56,9 +56,8 @@ var UnitOfWork = function () {
 
         updateQuestionByAnswer: function (questionId, answerId, newValueToUpdate) {
             var question = getQuestionById(questionId);
-        
-            //question.answers[answerId] = newValueToUpdate;
-            console.log(newValueToUpdate);
+ 
+            question.answers[answerId] = newValueToUpdate;
         },
     }
 }

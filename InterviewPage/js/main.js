@@ -58,6 +58,18 @@
         }
     }
 
+    function extractValueAccordingToInpuType($input) {
+        switch ($input.attr('type')) {
+            case 'radio':
+            case 'checkbox':
+                return $input.prop('checked');
+            case 'text':
+                return $input.prop('value');
+            default:
+                return '';
+        }
+    }
+
     function saveValuesFromForm() {
         $('.form input').each(
             function (index){  
@@ -66,6 +78,7 @@
                 unitOfWork.updateQuestionByAnswer(
                     input.attr('name'),
                     input.attr('id'),
+                    extractValueAccordingToInpuType(input),
                     // In case input is text it's attribute "value" will be defined,
                     // in other way attribute "checked" will.
                     // (input.attr('value') !== undefined) ? input.attr('value') : input.attr('checked')

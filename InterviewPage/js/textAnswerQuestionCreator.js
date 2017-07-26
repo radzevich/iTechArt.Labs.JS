@@ -6,6 +6,7 @@ function textAnswerQuestion() {
         var $form = $('<form class="form"></form>'); 
         var $text = $('<input>').attr({ 
             type: 'text', 
+            id: 0,
             name: question.id,  
             value: question.answers[0],
         }) 
