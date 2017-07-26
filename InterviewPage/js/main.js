@@ -94,7 +94,7 @@
 
         var savedMessageCreator = factory.getCreator(-1);
 
-        displayContentOnPage('.page__content', savedMessageCreator.create());
+        displayContentOnPage('.page', savedMessageCreator.create());
     }
 
     function onNextButtonClick() {
@@ -104,6 +104,7 @@
 
     function onSendButtonClick() {
         submitInterviewResults();
+        swapPagerButtonsToReload();
     }
 
     function onPreviousButtonClick() {
@@ -117,6 +118,11 @@
 
     function changeSendButtonBehaviorToNext($button) {
         $button.off('click').click(onNextButtonClick);
+    }
+
+    function swapPagerButtonsToReload() {
+        var li = convertToListItem('<a class="pager__previous-button" href="">Пройти заново</a>');
+        displayContentOnPage('.pager', li);
     }
 
     (function setOnNavigateButtonsHandlers () {
