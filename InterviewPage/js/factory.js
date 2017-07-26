@@ -22,7 +22,8 @@ QuestionVisualElementFactory.prototype.getCreator = function (questionTypeId) {
         createResultsSavedMessage,
         createSingleAnswerQuestion,
         createMultyAnswerQuestion,
-        textAnswerQuestion
+        textAnswerQuestion,
+        crateRatingQuestion,
     ];
 
     var creator = _templateCreators[questionTypeId + NUMBER_OF_SERVICE_TEMPLATES] || null;

@@ -63,6 +63,7 @@
         }
     }
 
+    // TODO: make indepent of another value but not of the type.
     function extractValueAccordingToInpuType($input) {
         switch ($input.attr('type')) {
             case 'radio':
@@ -104,6 +105,7 @@
 
     function onSendButtonClick() {
         submitInterviewResults();
+        removeBorderAroundInterviewBlock();
         swapPagerButtonsToReload();
     }
 
@@ -123,6 +125,10 @@
     function swapPagerButtonsToReload() {
         var li = convertToListItem('<a class="pager__previous-button" href="">Пройти заново</a>');
         displayContentOnPage('.pager', li);
+    }
+
+    function removeBorderAroundInterviewBlock() {
+        $('.page').css('border', 'none');
     }
 
     (function setOnNavigateButtonsHandlers () {

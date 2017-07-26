@@ -60,7 +60,7 @@ function Repository() {
         },
         {
             id: 3,
-            typeId: 0,
+            typeId: 3,
             text: '3 В чём сила?',
             answers: [
                 {0: ''},

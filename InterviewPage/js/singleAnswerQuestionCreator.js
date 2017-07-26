@@ -44,8 +44,10 @@ function createSingleAnswerQuestion() {
     }
 
     function addStylesToLabel($label) {
-        $label.css('display', 'block');
-        $label.css('marginLeft', '20px');
+        $label.css(
+            'display', 'block',
+            'marginLeft', '20px'
+        );
     }
 
     return self;
