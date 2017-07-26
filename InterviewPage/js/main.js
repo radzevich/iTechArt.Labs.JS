@@ -63,24 +63,25 @@
             function (index){  
                 var input = $(this);
 
-                unitOfWork.update(
+                unitOfWork.updateQuestionByAnswer(
                     input.attr('name'),
                     input.attr('id'),
                     // In case input is text it's attribute "value" will be defined,
                     // in other way attribute "checked" will.
-                    (input.attr('value') !== undefined) ? input.attr('value') : input.attr('checked')
-                )
+                    // (input.attr('value') !== undefined) ? input.attr('value') : input.attr('checked')
+                );
             }
         );
     }
 
     (function () {
         $('.pager__next-button').click(function () {
+            saveValuesFromForm();
             createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
         });
         $('.pager__previous-button').click(function () {
+            saveValuesFromForm();
             createPageWithQuestions(unitOfWork.getPreviousRangeOfQuestions());
         });
     })();
 })();
-

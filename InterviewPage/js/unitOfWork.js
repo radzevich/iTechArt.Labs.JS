@@ -10,6 +10,15 @@ var UnitOfWork = function () {
     var questions = repository.getQuestions();
     var iterator = new Iterator(questions.length);    
 
+    var getQuestionById = function (id) {
+        for (var i = 0; i < questions.length; i++) {
+            if (questions[i].id == id) {
+                return questions[i];
+            }
+            return null;
+        }
+    };
+
     return {
         getNextRangeOfQuestions: function () {
             var rangeOfIndexes = iterator.getNextRange(NUMBER_OF_QUESTIONS_ON_THE_PAGE);
@@ -45,8 +54,11 @@ var UnitOfWork = function () {
             return questions.length;
         },
 
-        updateQuastionByAnswer: function () {
-            
+        updateQuestionByAnswer: function (questionId, answerId, newValueToUpdate) {
+            var question = getQuestionById(questionId);
+        
+            //question.answers[answerId] = newValueToUpdate;
+            console.log(newValueToUpdate);
         },
     }
 }
