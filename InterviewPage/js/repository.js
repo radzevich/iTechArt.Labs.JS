@@ -146,9 +146,13 @@ function Repository() {
             return answers[id];
         },
 
-        updateQuastionByAnswer: function(quastion, answerId, answerValue) {
-            quastion.answers[answerId].answerValue
-        }
+        updateQuestionByAnswer: function (question, answerId, answerValue) {
+            question.answers[answerId].answerValue
+        },
+
+        save: function (questions) {
+            //Your code for working with data base could be there.
+        },
     }
 }
 

@@ -8,7 +8,7 @@
         var $ul = createUnorderedListOfQuestions(questions);
 
         checkIfCurrentRangeIsExtreme();
-        displayQuestionListOnPage('.page__content', $ul);
+        displayContentOnPage('.page__content', $ul);
     };
 
     function createUnorderedListOfQuestions(questions) { 
@@ -16,7 +16,10 @@
 
         for (var i = 0; i < questions.length; i++) {
             var questionCreator = factory.getCreator(questions[i].typeId);
-            var question = questionCreator.create(questions[i], unitOfWork.getAnswersToTheQuestion(questions[i]));
+            var question = questionCreator.create(
+                questions[i], 
+                unitOfWork.getAnswersToTheQuestion(questions[i])
+            );
 
             addItemToList($ul, $(question).html());
         }
@@ -37,12 +40,12 @@
                         .css('listStyleType', 'none');
     }
 
-    function displayQuestionListOnPage(page, questionList) {
+    function displayContentOnPage(page, contentToDisplay) {
         if (!$(page).is(':empty')) {
             $(page).children().remove();
         }
 
-        questionList.appendTo(page);
+        $(page).append(contentToDisplay);
     }
 
     function checkIfCurrentRangeIsExtreme () {
@@ -53,8 +56,10 @@
         }
         if (unitOfWork.currentRangeIsLast()) {
             $('.pager__next-button').text('Отправить');
+            changeNextButtonBehaviorToSend($('.pager__next-button'));
         } else {
             $('.pager__next-button').text('Далее');
+            changeSendButtonBehaviorToNext($('.pager__next-button'));
         }
     }
 
@@ -70,7 +75,7 @@
         }
     }
 
-    function saveValuesFromForm() {
+    function saveValuesFromInputs() {
         $('.form input').each(
             function (index){  
                 var input = $(this);
@@ -79,22 +84,43 @@
                     input.attr('name'),
                     input.attr('id'),
                     extractValueAccordingToInpuType(input),
-                    // In case input is text it's attribute "value" will be defined,
-                    // in other way attribute "checked" will.
-                    // (input.attr('value') !== undefined) ? input.attr('value') : input.attr('checked')
                 );
             }
         );
     }
 
-    (function () {
-        $('.pager__next-button').click(function () {
-            saveValuesFromForm();
-            createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
-        });
-        $('.pager__previous-button').click(function () {
-            saveValuesFromForm();
-            createPageWithQuestions(unitOfWork.getPreviousRangeOfQuestions());
-        });
+    function submitInterviewResults() {
+        unitOfWork.saveResults();
+
+        var savedMessageCreator = factory.getCreator(-1);
+
+        displayContentOnPage('.page__content', savedMessageCreator.create());
+    }
+
+    function onNextButtonClick() {
+        saveValuesFromInputs();
+        createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
+    }
+
+    function onSendButtonClick() {
+        submitInterviewResults();
+    }
+
+    function onPreviousButtonClick() {
+        saveValuesFromInputs();
+        createPageWithQuestions(unitOfWork.getPreviousRangeOfQuestions());
+    }
+
+    function changeNextButtonBehaviorToSend($button) {
+        $button.off('click').click(onSendButtonClick);
+    }
+
+    function changeSendButtonBehaviorToNext($button) {
+        $button.off('click').click(onNextButtonClick);
+    }
+
+    (function setOnNavigateButtonsHandlers () {
+        $('.pager__next-button').click(onNextButtonClick);
+        $('.pager__previous-button').click(onPreviousButtonClick);
     })();
 })();

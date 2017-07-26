@@ -59,6 +59,10 @@ var UnitOfWork = function () {
  
             question.answers[answerId] = newValueToUpdate;
         },
+
+        saveResults() {
+            repository.save(questions);
+        }
     }
 }
  
