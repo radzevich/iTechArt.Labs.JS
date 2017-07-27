@@ -65,10 +65,10 @@ function CustomArray ()
             //In case the number is equal to -1, sequences of (0 -> n-1) and (0 -> n) will be concatinated.
             //To avoid this the next test used.
             if (number * 1 === -1) {
-                return arr.slice(0, number * 1)
+                return arr.slice(0, number)
             } else {
-                return arr.slice(0, number * 1)
-                        .concat(arr.slice(number * 1 + 1, arr.length));
+                return arr.slice(0, number)
+                        .concat(arr.slice(number + 1, arr.length));
             }
         },
 

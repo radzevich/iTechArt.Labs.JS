@@ -18,8 +18,7 @@ function TestFunctions() {
             var testFunction = function (arrayItem) {
                 return (arrayItem >= 5 && arrayItem <= 10);
             }
-
-            libForTests.where(sourceArrayForTests, testFunction);
+            testResultArray = libForTests.where(sourceArrayForTests, testFunction);
 
             return testResultArray;
         },
@@ -35,8 +34,9 @@ function TestFunctions() {
         testSelect: function (sourceArrayForTests) {
             var testResultArray = [];
             var testFunction = function (arrayItem) {
-                debugger;
-                return Object.getPrototypeOf(arrayItem);
+                var typeChecker = new CheckType();
+
+                return typeChecker.isNumber(arrayItem);
             }
 
             return libForTests.select(sourceArrayForTests, testFunction);
