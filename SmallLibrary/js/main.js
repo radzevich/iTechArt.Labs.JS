@@ -3,11 +3,10 @@
 
     var testDataGenerator = new TestDataGenerator();
     var testFunctions = new TestFunctions();
-
-    // var testData = {};
+    var testData = null;
 
     function generateNewTestData() {
-        this.testData = testDataGenerator.generate(TEST_ARRAY_SIZE);
+        testData = testDataGenerator.generate(TEST_ARRAY_SIZE);
     }
 
     function onOperationButtonClick(operationToExecute) {
@@ -24,13 +23,18 @@
         var elementToShow = null;
 
         //'First' and 'last' are two operations that return a single object value instead of array.
-        if (this.className === '.block__button_first' || this.className === '.block__button_last') {
-            elementToShow = convertUnitToListItem(testResult);
-        } else {
-            elementToShow = createListToDisplayFromArray(testResult);
+        if (this.className === 'button block__button_first' || this.className === 'button block__button_last') {
+            testResult = convertObjectToArray(testResult);
         }
 
-        showList('.array-display_result', elementToShow);
+        showList('.array-display_result', createListToDisplayFromArray(testResult));
+    }
+
+    function convertObjectToArray(objectToConvert) {
+        var arrayConvertedFromObject = [];
+
+        arrayConvertedFromObject[0] = objectToConvert;
+        return arrayConvertedFromObject;
     }
 
     function createListToDisplayFromArray(array) {
@@ -67,24 +71,24 @@
         showList('.array-display_source', createListToDisplayFromArray(testData));
     });
     $('.block__button_for-each').click(function () {
-        onOperationButtonClick(testFunctions.testForEach)
+        onOperationButtonClick.call(this, testFunctions.testForEach);
     });
     $('.block__button_where').click(function () {
-        onOperationButtonClick(testFunctions.testWhere)
+        onOperationButtonClick.call(this, testFunctions.testWhere)
     });
     $('.block__button_first').click(function () {
-        onOperationButtonClick(testFunctions.testFirst)
+        onOperationButtonClick.call(this, testFunctions.testFirst)
     });
     $('.block__button_last').click(function () {
-        onOperationButtonClick(testFunctions.testLast)
+        onOperationButtonClick.call(this, testFunctions.testLast)
     });
     $('.block__button_select').click(function () {
-        onOperationButtonClick(testFunctions.testSelect)
+        onOperationButtonClick.call(this, testFunctions.testSelect)
     });
     $('.block__button_skip').click(function () {
-        onOperationButtonClick(testFunctions.testSkip)
+        onOperationButtonClick.call(this, testFunctions.testSkip)
     });
     $('.block__button_take').click(function () {
-        onOperationButtonClick(testFunctions.testTake)
+        onOperationButtonClick.call(this, testFunctions.testTake)
     });
 })();

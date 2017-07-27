@@ -35,7 +35,8 @@ function TestFunctions() {
         testSelect: function (sourceArrayForTests) {
             var testResultArray = [];
             var testFunction = function (arrayItem) {
-                return arrayItem.prototype;
+                debugger;
+                return Object.getPrototypeOf(arrayItem);
             }
 
             return libForTests.select(sourceArrayForTests, testFunction);
