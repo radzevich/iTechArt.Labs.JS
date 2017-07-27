@@ -70,6 +70,7 @@
             case 'checkbox':
                 return $input.prop('checked');
             case 'text':
+            case 'file':
                 return $input.prop('value');
             default:
                 return '';

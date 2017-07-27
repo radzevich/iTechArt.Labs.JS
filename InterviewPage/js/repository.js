@@ -71,7 +71,7 @@ function Repository() {
         },
         {
             id: 4,
-            typeId: 1,
+            typeId: 4,
             text: '4 В чём сила?',
             answers: [
                 {0: ''},

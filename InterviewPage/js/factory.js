@@ -24,6 +24,7 @@ QuestionVisualElementFactory.prototype.getCreator = function (questionTypeId) {
         createMultyAnswerQuestion,
         textAnswerQuestion,
         crateRatingQuestion,
+        createFileQuestion,
     ];
 
     var creator = _templateCreators[questionTypeId + NUMBER_OF_SERVICE_TEMPLATES] || null;
