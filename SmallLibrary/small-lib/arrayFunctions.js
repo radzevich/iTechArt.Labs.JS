@@ -46,7 +46,7 @@ function CustomArray ()
         select: function (arr, selector) {
             var _result = [];
 
-            if (!arr || !selector) {
+            if (!arr) {
                 return null;
             }
 
@@ -58,13 +58,13 @@ function CustomArray ()
         },
 
         skip: function (arr, number) {
-            if (!arr || !number) {
+            if (!arr) {
                 return null;
             }
 
             //In case the number is equal to -1, sequences of (0 -> n-1) and (0 -> n) will be concatinated.
             //To avoid this the next test used.
-            if (number * 1 === -1) {
+            if (number === -1) {
                 return arr.slice(0, number)
             } else {
                 return arr.slice(0, number)
@@ -73,11 +73,11 @@ function CustomArray ()
         },
 
         take: function (arr, number) {
-            if (!arr || !number) {
+            if (!arr) {
                 return null;
             }
             
-            return arr.slice(0, number * 1);
+            return arr.slice(0, number);
         }
     }
 };

@@ -1,27 +1,28 @@
 function CheckType() {
     return {
         isArray: function (obj) {
-            return obj && obj.constructor === Array;
+            return !isNull(obj) && !isUndefined(obj) && obj.constructor === Array;
         },
 
         isBoolean: function (obj) {
-            return obj && obj.constructor === Boolean;
+            return !isNull(obj) && !isUndefined(obj) && obj.constructor === Boolean;
         },
 
         isDate: function (obj) {
-            return obj && obj.constructor === Date;
+            return !isNull(obj) && !isUndefined(obj) && obj.constructor === Date;
         },
 
         isNumber: function (obj) {
-            return obj && obj.constructor === Number;
+            debugger;
+            return !isNull(obj) && !isUndefined(obj) && obj.constructor === Number;
         },
 
         isString: function (obj) {
-            return obj && obj.constructor === String;
+            return !isNull(obj) && !isUndefined(obj) && obj.constructor === String;
         },
 
         isFunction: function (obj) {
-            return obj && obj.constructor === Function;
+            return !isNull(obj) && !isUndefined(obj) && obj.constructor === Function;
         },
 
         isUndefined: function (obj) {

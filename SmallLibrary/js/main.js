@@ -14,7 +14,7 @@
 
         //'Skip' and 'take' are two operations that need an optional value.
         if (this.className === 'button block__button_skip') {
-            optionalValue = +$('.skip-input').prop('value');;
+            optionalValue = +$('.skip-input').prop('value');
         } else if (this.className === 'button block__button_take') {
             optionalValue = +$('.take-input').prop('value');
         }

@@ -35,7 +35,7 @@ function TestFunctions() {
             var testResultArray = [];
             var testFunction = function (arrayItem) {
                 var typeChecker = new CheckType();
-
+                
                 return typeChecker.isNumber(arrayItem);
             }
 
