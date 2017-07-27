@@ -71,6 +71,7 @@
                 return $input.prop('checked');
             case 'text':
             case 'file':
+            case 'range':
                 return $input.prop('value');
             default:
                 return '';

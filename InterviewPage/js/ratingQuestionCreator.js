@@ -9,21 +9,31 @@ function crateRatingQuestion() {
                 id: id,
                 checked: !!isChecked,
         });
+        var $label = $('<label>').attr({
+            for: id,
+        })
+
+        $label.append('<span class="glyphicon glyphicon-star-empty"></span>');
 
         addCustomBehavior($checkbox);
         addStyleToCheckBox($checkbox);
         addStylesToDiv($div);
 
-        $div.append($checkbox)
-            .append('<span class="glyphicon glyphicon-star-empty"></span>');
+        
+        $div.append($label);
+        $div.append($checkbox);
 
         return $div;
     }
 
-    function addStyleToCheckBox($checkbox) {
+    function addStyleToCheckBox($checkbox, $label) {
         $checkbox.hide()
                  .width('15px')
                  .height('15px');
+        $checkbox.hide().after($label).click(function(){
+            
+            $(this).prev('input:checkbox').click();
+        });
     }
 
     function addStylesToDiv($div) {

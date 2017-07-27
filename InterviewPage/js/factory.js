@@ -25,6 +25,7 @@ QuestionVisualElementFactory.prototype.getCreator = function (questionTypeId) {
         textAnswerQuestion,
         crateRatingQuestion,
         createFileQuestion,
+        createRangeQuestion,
     ];
 
     var creator = _templateCreators[questionTypeId + NUMBER_OF_SERVICE_TEMPLATES] || null;

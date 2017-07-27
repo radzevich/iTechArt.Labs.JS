@@ -82,14 +82,13 @@ function Repository() {
         },
         {
             id: 5,
-            typeId: 2,
+            typeId: 5,
             text: '5 В чём сила?',
-            answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
-            ]
+            answers: {
+                0: '',
+                'min': 0,
+                'max': 10,
+            }
         },
         {
             id: 6,
