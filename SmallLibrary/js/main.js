@@ -1,179 +1,90 @@
+(function () {
+    const TEST_ARRAY_SIZE = 10;
 
-// function TestDataForMiniJsLibrary() {
-//     this.arrayWithIntegerValues = [1,2,3 ];
+    var testDataGenerator = new TestDataGenerator();
+    var testFunctions = new TestFunctions();
 
+    // var testData = {};
 
-
-// }
-
-
-
-
-// (function(){
-
-// var testData = new TestDataForMiniJsLibrary();
-// var tests = new TestsForMiniJsLibrary(testData);
-// var populateTestData = function() {
-// var testData = new TestDataForMiniJsLibrary();
-// testData.array = $('.array').html();
-// };
-// $('.button').on('click', populateTestData);
-// $('.findLastElement').on('click', tests.findLastElement);
-
-// })();
-
-
-(function(){
-    (function initializePageEvents() {
-        
-    })();
-
-})();
-
-
-var Main = function () {
-    var _instance = {};
-    var _array = [];
-
-    $(document).ready(function () {
-        var _displayContext = 'array-display__list_proc';
-        var _event = 'click';
-
-        $('.form__button_value').on(_event, display(_displayContext, onInputButtonClick(insertValue)));
-        $('.form__button_null').on(_event, display(_displayContext, onInputButtonClick(insertNull)));
-        $('.form__button_undefined').on(_event, display(_displayContext, onInputButtonClick(insertUndefined)));
-
-        $('.block__button_for-each').on(_event, display(_displayContext, onForEachButtonClick()));
-        $('.block__button_where').on(_event, display(_displayContext, onWhereButtonClick()));
-        $('.block__button_first').on(_event, display(_displayContext, onFirstButtonClick()));
-        $('.block__button_last').on(_event, display(_displayContext, onLastButtonClick()));
-        $('.block__button_select').on(_event, display(_displayContext, onSelectButtonClick()));
-        $('.block__button_skip').on(_event, display(_displayContext, onSkipButtonClick()));
-        $('.block__button_take').on(_event, display(_displayContext, onTakeButtonClick()));
-    }); 
-
-    function getArray() {
-        return _array;
+    function generateNewTestData() {
+        this.testData = testDataGenerator.generate(TEST_ARRAY_SIZE);
     }
 
-    function insert() {
-        _array.push(this.value);
-    }
+    function onOperationButtonClick(operationToExecute) {
+        var optionalValue;
 
-    function insertValue() {
-        var _valueToInput = {
-            value: $(".form__text").val()
-        } 
-
-        if (_valueToInput.value !== 0 && !_valueToInput.value) {
-            return;
+        //'Skip' and 'take' are two operations that need an optional value.
+        if (this.className === '.block__button_skip') {
+            optionalValue = +$('.skip-input').value();
+        } else if (this.className === '.block__button_take') {
+            optionalValue = +$('.skip-take').value();
         }
 
-        insert.call(_valueToInput);   
-    }
+        var testResult = operationToExecute(testData, optionalValue);
+        var elementToShow = null;
 
-    function insertNull() {
-        var _valueToInput = {
-            value: null
-        } 
-
-        insert.call(_valueToInput);   
-    }
-
-    function insertUndefined() {
-        var _valueToInput = {
-            value: undefined
-        } 
-
-        insert.call(_valueToInput);   
-    }
-
-    function refresh() {
-        $(this.context).empty();
-        console.log("refreshed");
-    }
-
-    function show(valueToShow) {   
-        $(this.context).html(valueToShow);  
-    }
-
-    function objectToString(obj) {
-        var _string = "";
-
-        if (!obj) {
-            return _string;
-        }
-
-        if (CheckType.isString(obj)) {
-            _string += '<li>' + obj + '</li>';
+        //'First' and 'last' are two operations that return a single object value instead of array.
+        if (this.className === '.block__button_first' || this.className === '.block__button_last') {
+            elementToShow = convertUnitToListItem(testResult);
         } else {
-            for (var i = 0; i < Object.values(obj).length; i++) {
-                _string += '<li>' + Object.values(obj)[i] + '</li>';
+            elementToShow = createListToDisplayFromArray(testResult);
+        }
+
+        showList('.array-display_result', elementToShow);
+    }
+
+    function createListToDisplayFromArray(array) {
+        var $ul = $('<ul></ul');
+
+        for (var i = 0; i < array.length; i++) {
+            $ul.append(convertUnitToListItem(array[i]));
+        }
+
+        return $ul;
+    }
+
+    function convertUnitToListItem(unitToConvert) {
+        return '<li>' + unitToConvert + '</li>';
+    }
+
+    function showList(parentElement, $listToShow) {
+        removeLatterAddedElements(parentElement, $listToShow[0].nodeName);
+        $(parentElement).append($listToShow);
+    }
+
+    function removeLatterAddedElements(parentElement, childElementClassName) {
+        var parentElementChilds = $(parentElement).children();
+
+        for (var i = 0; i < parentElementChilds.length; i++) {
+            if (parentElementChilds[i].nodeName === childElementClassName) {
+                parentElementChilds[i].remove();
             }
         }
-
-        return _string;
     }
 
-    function display (parentElement, objectToDisplay) {
-        var _displayContext = {
-            context: parentElement,
-        };
-
-        refresh.call(_displayContext);
-        show.call(_displayContext, objectToString(objectToDisplay));
-    }
-
-    function onInputButtonClick(callback) {
-        callback();
-        return getArray();
-    }
-
-    function onForEachButtonClick() {
-        var _func = function (item) {
-            console.log(item * 2);
-        };
-
-        CustomArray.forEach(_array, _func);
-    }
-
-    function onWhereButtonClick() {
-        var _func = function (item) {
-            return (item >= 10 && item <= 20);
-        };
-        
-        return CustomArray.where(_array, _func);
-    }
-
-    function onFirstButtonClick() {
-        return CustomArray.first(_array);
-    }
-
-    function onLastButtonClick() {
-        return CustomArray.last(_array);
-    }
-
-    function onSelectButtonClick() {
-        var _func = function (item) {
-            return item.length;
-        };
-
-        return CustomArray.select(_array, _func);
-    }
-
-    function onSkipButtonClick() {
-        //var _value = $('#skip-block__number-input').val();
-        var _value = document.getElementById('skip-block__number-input').value;
-
-        return CustomArray.skip(_array, _value);
-    }
-
-    function onTakeButtonClick() {
-        var _value = document.getElementById('take-block__number-input').value;
-
-        return CustomArray.take(_array, _value);
-    }
-
-    return _instance;
-}();
-
+    $('.form__button_generate').click(function () {
+        generateNewTestData();
+        showList('.array-display_source', createListToDisplayFromArray(testData));
+    });
+    $('.block__button_for-each').click(function () {
+        onOperationButtonClick(testFunctions.testForEach)
+    });
+    $('.block__button_where').click(function () {
+        onOperationButtonClick(testFunctions.testWhere)
+    });
+    $('.block__button_first').click(function () {
+        onOperationButtonClick(testFunctions.testFirst)
+    });
+    $('.block__button_last').click(function () {
+        onOperationButtonClick(testFunctions.testLast)
+    });
+    $('.block__button_select').click(function () {
+        onOperationButtonClick(testFunctions.testSelect)
+    });
+    $('.block__button_skip').click(function () {
+        onOperationButtonClick(testFunctions.testSkip)
+    });
+    $('.block__button_take').click(function () {
+        onOperationButtonClick(testFunctions.testTake)
+    });
+})();

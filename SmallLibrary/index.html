@@ -11,24 +11,20 @@
     <body>
         <header class="header">
             <div class="input-form">
-                <span>Input values one bu one:</span>
-                <input class="form__text" id="array-input" type="text"/>
-                <button class="button form__button_value" onclick="Main.insertValue(), Main.display('.array-display__list_source', Main.getArray());">Add</button>
-                <button class="button form__button_null" onclick="Main.insertNull(), Main.display('.array-display__list_source', Main.getArray());">null</button>
-                <button class="button form__button_undefined" onclick="Main.insertUndefined(), Main.display('.array-display__list_source', Main.getArray());">undefined</button>
+                <span>Push to generate new test data </span>
+                <button class="button form__button_generate">Generate!</button>
             </div>
         </header>
         <div class="content">
-            <div class="array-display">
+            <div class="array-display_source">
                 <h3 class="array-display__header">All Elements of the Array:</h3>
-                <ul class="array-display__list_source"></ul>
             </div>
             <div class="operation-field">
                 <div class="block">
                     <button class="button block__button_for-each">forEach*</button>
                     <label class="params">x * 2</label>
                 </div>
-                <div class="block" onclick="Main.display('.array-display__list_proc', Main.onWhereButtonClick());">
+                <div class="block">
                     <button class="button block__button_where">where</button>
                     <label class="params">10 &le; x &le; 20</label>
                 </div>
@@ -44,23 +40,24 @@
                 </div>
                 <div class="block">
                     <button class="button block__button_skip">skip</button>
-                    <input class="params" id="skip-block__number-input" type="text"/>
+                    <input class="params skip-input" id="skip-block__number-input" type="text"/>
                 </div>
                 <div class="block">
                     <button class="button block__button_take">take</button>
-                    <input class="params" id="take-block__number-input" type="text"/>
+                    <input class="params skip-input" id="take-block__number-input" type="text"/>
                 </div>
             </div>
-            <div class="array-display">
+            <div class="array-display_result">
                 <h3 class="array-display__header">Elements of the processed Array:</h3>
                 <ul class="array-display__list_proc"></ul>
             </div>
         </div>
-        <footer><span>*ForEach function is a void one that's why use console to see it's output</span></footer>
         <script src="./small-lib/typeCheckFunctions.js"></script>
         <script src="./small-lib/arrayFunctions.js"></script>
         <script src="./small-lib/patterns.js"></script>
         <script src="./js/jquery-3.2.1.min.js"></script>
+        <script src="./js/testDataGenerator.js"></script>
+        <script src="./js/testFunctions.js"></script>
         <script src="./js/main.js"></script>
     </body>
 </html>
