@@ -1,46 +1,11 @@
 function crateRatingQuestion() {
     const RATING_VALUES_NUMBER = 5;
 
-    function createCustomCheckbox(parentId, id, isChecked) {
-        var $div = $('<div></div>');
-        var $checkbox = $('<input>').attr({ 
-                type: 'checkbox',  
-                name: parentId, 
-                id: id,
-                checked: !!isChecked,
-        });
-        var $label = $('<label>').attr({
-            for: id,
-        })
-
-        $label.append('<span class="glyphicon glyphicon-star-empty"></span>');
-
-        addCustomBehavior($checkbox);
-        addStyleToCheckBox($checkbox);
-        addStylesToDiv($div);
-
-        
-        $div.append($label);
-        $div.append($checkbox);
-
-        return $div;
-    }
-
-    function addStyleToCheckBox($checkbox, $label) {
-        $checkbox.hide()
-                 .width('15px')
-                 .height('15px');
-        $checkbox.hide().after($label).click(function(){
-            
-            $(this).prev('input:checkbox').click();
-        });
-    }
-
-    function addStylesToDiv($div) {
-        $div.css(
-            'display', 'inline',
-            'margin', '3px'
-        );                           
+    function createCustomCheckbox(questionId, answerId, isChecked) {
+        return  '<div class="interview-input_rating-div">' + 
+                    '<input class="interview-input_rating-checkbox" type="checkbox" name="' + questionId + '" id="' + answerId + '" checked="' + !!isChecked + '">' +
+                    '<label><span class="glyphicon glyphicon-star-empty"></span></label>' +
+                '</div>';
     }
 
     function addCustomBehavior($checkbox) {

@@ -6,11 +6,11 @@ function createMultyAnswerQuestion() {
         var $form = $('<form class="form"></form>'); 
 
         for (var key in question.answers) {
-            $form.append(createCheckboxWithLabel(
+            $form.append(createAnswerBlock(
                 question.id,
                 answers[key].id, 
                 answers[key].text,
-                question.answers[key],
+                !!question.answers[key] ? 'checked="true"' : ''
             )); 
         }
 
@@ -20,34 +20,15 @@ function createMultyAnswerQuestion() {
         return $div; 
     };
     //getAnswerTemplate
-    function createCheckboxWithLabel(parentId, id, text, isChecked) {
-        var $div = $('<div></div>');
-        var $checkbox = $('<input>').attr({ 
-                type: 'checkbox',  
-                name: parentId, 
-                id: id,
-                checked: !!isChecked,
-        });
-        var $label = $("<label>").text(text);
-
-        addStylesToCheckbox($checkbox);
-        addStylesToLabel($label);
-
-        $div.append($checkbox)
-            .append($label);
-
-        return $div;
+    function createAnswerBlock(qeustionId, answerId, text, isChecked) {
+        return  '<div>' + 
+                    '<input class="interview-input_checkbox" type="checkbox" name="' + qeustionId + '" id="' + answerId + '"' + isChecked + '">' +
+                    '<label class="interview-input_label">' + text + '</label>' +
+                '</div>';
     }
 
     function addStylesToCheckbox($checkbox) {
         $checkbox.css('float', 'left');
-    }
-
-    function addStylesToLabel($label) {
-        $label.css(
-            'display', 'block',
-            'marginLeft', '20px'
-        );
     }
 
     return self;

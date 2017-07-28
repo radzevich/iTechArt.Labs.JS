@@ -1,0 +1,20 @@
+.interview-input_label {
+    display: block;
+    margin-left: 20px;
+}
+
+.interview-input_radio,
+.interview-input_checkbox {
+    float: left;
+}
+
+.interview-input_rating-div {
+    display: inline;
+    margin: 3px;
+}
+
+.interview-input_rating-checkbox {
+    width: 15px;
+    height: 15px;
+    display: none;
+}
