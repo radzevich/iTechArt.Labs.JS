@@ -1,7 +1,7 @@
 function createRangeQuestion() {
     return {
         create: function (question) {
-            var div = (document.createElement('div')); 
+            var $div = $('<div></div'); 
             var $form = $('<form class="form"></form>');
             var $startIndexValue = $('<label>').text(question.answers[1]);
             var $endIndexValue = $('<label>').text(question.answers[2]);
@@ -13,15 +13,14 @@ function createRangeQuestion() {
                 min: question.answers[1],
                 max: question.answers[2],
             });
-        debugger;
             
             $form.append($startIndexValue)
                  .append($input)
                  .append($endIndexValue);
-            $(div).append('<h4>' + question.text + '</h4>');  
-            $(div).append($form);
+            $div.append('<h4>' + question.text + '</h4>');  
+            $div.append($form);
 
-            return div;
+            return $div;
         }
     }
 }

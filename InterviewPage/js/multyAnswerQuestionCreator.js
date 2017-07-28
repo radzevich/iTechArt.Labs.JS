@@ -2,7 +2,7 @@ function createMultyAnswerQuestion() {
     var self = {};
 
     self.create = function (question, answers) {
-        var div = (document.createElement('div')); 
+        var $div = $('<div></div'); 
         var $form = $('<form class="form"></form>'); 
 
         for (var key in question.answers) {
@@ -14,12 +14,12 @@ function createMultyAnswerQuestion() {
             )); 
         }
 
-        $(div).append('<h4>' + question.text + '</h4>');  
-        $(div).append($form);
+        $div.append('<h4>' + question.text + '</h4>');  
+        $div.append($form);
 
-        return div; 
+        return $div; 
     };
-
+    //getAnswerTemplate
     function createCheckboxWithLabel(parentId, id, text, isChecked) {
         var $div = $('<div></div>');
         var $checkbox = $('<input>').attr({ 

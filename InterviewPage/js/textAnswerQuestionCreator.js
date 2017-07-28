@@ -2,7 +2,7 @@ function textAnswerQuestion() {
     var self = {};
 
     self.create = function (question) {
-        var _div = (document.createElement('div')); 
+        var $div = $('<div></div'); 
         var $form = $('<form class="form"></form>'); 
         var $text = $('<input>').attr({ 
             type: 'text', 
@@ -12,9 +12,9 @@ function textAnswerQuestion() {
         }) 
 
         $form.append($text); 
-        $(_div).append('<h4>' + question.text + '</h4>'); 
-        $(_div).append($form); 
-        return _div;
+        $div.append('<h4>' + question.text + '</h4>'); 
+        $div.append($form); 
+        return $div;
     };
 
     return self;

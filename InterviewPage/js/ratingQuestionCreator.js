@@ -74,7 +74,7 @@ function crateRatingQuestion() {
 
     return {
         create: function (question) {
-            var div = (document.createElement('div')); 
+            var $div = $('<div></div>');
             var $form = $('<form class="form"></form>');
 
             for (var i = 0; i < RATING_VALUES_NUMBER; i++) {
@@ -85,10 +85,10 @@ function crateRatingQuestion() {
                 )); 
             }
 
-            $(div).append('<h4>' + question.text + '</h4>');  
-            $(div).append($form);
+            $div.append('<h4>' + question.text + '</h4>');  
+            $div.append($form);
 
-            return div;
+            return $div;
         }
     }
 }

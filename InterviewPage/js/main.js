@@ -1,8 +1,11 @@
 (function () {
-    this.unitOfWork = new UnitOfWork();
-    var factory = new QuestionVisualElementFactory(); 
+    const NUMBER_OF_ITEMS_ON_PAGE = 4;
 
-    createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
+    var unitOfWork = new UnitOfWork();
+    var factory = new QuestionVisualElementFactory(); 
+    var pagingController = new PagingController(unitOfWork.getQuestions(), NUMBER_OF_ITEMS_ON_PAGE);
+
+    createPageWithQuestions(pagingController.getNextRangeOfItems());
 
     function createPageWithQuestions(questions) {
         var $ul = createUnorderedListOfQuestions(questions);
@@ -16,12 +19,12 @@
 
         for (var i = 0; i < questions.length; i++) {
             var questionCreator = factory.getCreator(questions[i].typeId);
-            var question = questionCreator.create(
+            var $question = questionCreator.create(
                 questions[i], 
                 unitOfWork.getAnswersToTheQuestion(questions[i])
             );
 
-            addItemToList($ul, $(question).html());
+            addItemToList($ul, $question.html());
         }
 
         return $ul;
@@ -49,12 +52,12 @@
     }
 
     function checkIfCurrentRangeIsExtreme () {
-        if (unitOfWork.currentRangeIsFirst()) {
+        if (pagingController.currentRangeIsFirst()) {
             $('.pager__previous-button').css('display', 'none');
         } else {
             $('.pager__previous-button').css('display', 'inline');
         }
-        if (unitOfWork.currentRangeIsLast()) {
+        if (pagingController.currentRangeIsLast()) {
             $('.pager__next-button').text('Отправить');
             changeNextButtonBehaviorToSend($('.pager__next-button'));
         } else {
@@ -102,7 +105,7 @@
 
     function onNextButtonClick() {
         saveValuesFromInputs();
-        createPageWithQuestions(unitOfWork.getNextRangeOfQuestions());
+        createPageWithQuestions(pagingController.getNextRangeOfItems());
     }
 
     function onSendButtonClick() {
@@ -113,7 +116,7 @@
 
     function onPreviousButtonClick() {
         saveValuesFromInputs();
-        createPageWithQuestions(unitOfWork.getPreviousRangeOfQuestions());
+        createPageWithQuestions(pagingController.getPreviousRangeOfItems());
     }
 
     function changeNextButtonBehaviorToSend($button) {
