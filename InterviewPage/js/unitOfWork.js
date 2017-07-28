@@ -7,7 +7,7 @@ var UnitOfWork = function () {
     const NUMBER_OF_QUESTIONS_ON_THE_PAGE = 4;
 
     var repository = new Repository();
-    var questions = repository.getQuestions();
+    var questions = convertJsonObjectsToQuestions(repository.getQuestions());
 
     var getQuestionById = function (id) {
         for (var i = 0; i < questions.length; i++) {
@@ -17,6 +17,47 @@ var UnitOfWork = function () {
         }
         return null;
     };
+
+    function convertJsonObjectsToQuestions(jsonObjects) {
+        var resultQuestionList = [];
+
+        for (var i = 0; i < jsonObjects.length; i++) {
+            var question = Object.assign({}, jsonObjects[i]);
+            var answerIdList = question.answers;
+            var resultAnswerList = {};
+
+            for (var j = 0; j < answerIdList.length; j++) {
+                var answerId = answerIdList[j];
+
+                
+                resultAnswerList[answerId] = '';
+            }
+            question.answers = resultAnswerList;
+            resultQuestionList[i] = question;
+        }
+        return resultQuestionList;
+    }
+
+    function createListOfJsonAnswers(questionList) {
+        var jsonAnswerList = {};
+        
+        for (var i = 0; i < questionList.length; i++) {
+            var questionId = questionList[i].id;
+            var answers = questionList[i].answers;
+
+            jsonAnswerList[questionId] = {};
+            jsonAnswerList[questionId].answers = {};
+
+            for (var id in answers) {
+                if (!answers[id]) {
+                    continue;
+                }
+
+                jsonAnswerList[questionId].answers[id] = answers[id];
+            } 
+        }   
+        return jsonAnswerList;   
+    }
 
     return {
         getAnswersToTheQuestion: function (question) {
@@ -44,7 +85,9 @@ var UnitOfWork = function () {
         },
 
         saveResults() {
-            repository.save(questions);
+            var listOfJsonAnswers = createListOfJsonAnswers(questions);
+
+            repository.save(listOfJsonAnswers);
         }
     }
 }

@@ -2,16 +2,6 @@ function Repository() {
     var questions = loadQuestions();
     var answers = transformArrayToKeyList(loadAnswers());
 
-    (function markQuestionsAsClean(questions, answers) {
-        for (var i = 0; i < questions.length; i++) {
-            var answerList = questions[i].answers;
-
-            for (var id in answerList) {
-                answerList[id] = '';
-            }
-        }
-    })(questions);
-
     function transformArrayToKeyList(arrayOfAnswers) {
         var keyList = {};
 
@@ -30,10 +20,10 @@ function Repository() {
             typeId: 0,
             text: '0 В чём сила?',
             answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
+                0,
+                1,
+                2,
+                3,
             ]
         },
         {
@@ -41,10 +31,10 @@ function Repository() {
             typeId: 1,
             text: '1 В чём сила?',
             answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
+                0,
+                1,
+                2,
+                3,
             ]
         },
         {
@@ -52,53 +42,39 @@ function Repository() {
             typeId: 2,
             text: '2 В чём сила?',
             answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
+                0,
+                1,
+                2,
+                3,
             ]
         },
         {
             id: 3,
             typeId: 3,
             text: '3 В чём сила?',
-            answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
-            ]
+            answers: []
         },
         {
             id: 4,
             typeId: 4,
             text: '4 В чём сила?',
-            answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
-            ]
+            answers: []
         },
         {
             id: 5,
             typeId: 5,
             text: '5 В чём сила?',
-            answers: {
-                0: '',
-                'min': 0,
-                'max': 10,
-            }
+            answers: []
         },
         {
             id: 6,
             typeId: 0,
             text: '6 В чём сила?',
             answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
+                0,
+                1,
+                2,
+                3,
             ]
         },
         {
@@ -106,10 +82,10 @@ function Repository() {
             typeId: 1,
             text: '7 В чём сила?',
             answers: [
-                {0: ''},
-                {1: ''},
-                {2: ''},
-                {3: ''},
+                0,
+                1,
+                2,
+                3,
             ]
         },
         ];
@@ -151,6 +127,7 @@ function Repository() {
 
         save: function (questions) {
             //Your code for working with data base could be there.
+            console.log(questions);
         },
     }
 }
