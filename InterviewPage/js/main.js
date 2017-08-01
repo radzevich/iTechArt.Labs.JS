@@ -164,11 +164,14 @@
     }
 
     function changeNextButtonBehaviorToSend($button) {
-        $button.off('click').click(onSendButtonClick);
+        $button.off('click')
+               .on ('click', onSendButtonClick);
     }
 
     function changeSendButtonBehaviorToNext($button) {
-        $button.off('click').click(onNextButtonClick);
+        debugger;
+        $button.off('click')
+               .on ('click', onNextButtonClick);
     }
 
     function swapPagerButtonsToReload() {
@@ -179,9 +182,4 @@
     function removeBorderAroundInterviewBlock() {
         $('.page').css('border', 'none');
     }
-
-    (function setOnNavigateButtonsHandlers () {
-        $('.pager__next-button').click(onNextButtonClick);
-        $('.pager__previous-button').click(onPreviousButtonClick);
-    })();
 })();
