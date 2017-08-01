@@ -1,5 +1,6 @@
 (function () {
     const NUMBER_OF_ITEMS_ON_PAGE = 4;
+    const RESULTS_SAVING_ERROR_MESSAGE = 'Ответы не на все обязательные вопросы получены!';
 
     var unitOfWork = new UnitOfWork();
     var factory = new QuestionVisualElementFactory(); 
@@ -24,14 +25,22 @@
                 unitOfWork.getAnswersToTheQuestion(questions[i])
             );
 
-            addItemToList($ul, $question.html());
+            if (questions[i].isRequired) {
+                markQuestionAsRequired($question);
+            }
+
+            addItemToList($ul, $question);
         }
 
         return $ul;
     }
 
+    function markQuestionAsRequired($questionElement) {
+        $questionElement.addClass('required');
+    }
+
     function convertToListItem(stringToConvert) {
-        return '<li>' + stringToConvert + '</li>'; 
+        return $('<li></li>').append(stringToConvert); 
     }
 
     function addItemToList(list, item) {
@@ -44,11 +53,7 @@
     }
 
     function displayContentOnPage(page, contentToDisplay) {
-        if (!$(page).is(':empty')) {
-            $(page).children().remove();
-        }
-
-        $(page).append(contentToDisplay);
+        $(page).html(contentToDisplay);
     }
 
     function checkIfCurrentRangeIsExtreme () {
@@ -81,18 +86,52 @@
         }
     }
 
+    function saveValuesFromInputsWithValidation() {
+        $('.page__content li').children('div').each(
+            function() {
+                // var questionIsRequired = !!(this.className === 'required'); 
+                // var answerReceived = saveValuesFromInputs.call(this, questionIsRequired);
+
+                // if (!answerIsValid(questionIsRequired, answerReceived)) {
+                //     debugger;
+                //     throw RESULTS_SAVING_ERROR_MESSAGE;
+                // }
+                console.log(this);
+            }
+        ) 
+    }
+
     function saveValuesFromInputs() {
-        $('.form input').each(
-            function (index){  
-                var input = $(this);
+        var answerReceived = false;
+
+        $(this).find('.form input').each(
+            function (index) {  
+                var $input = $(this);
+                var answerValue = extractValueAccordingToInpuType($input);
+
+                answerReceived = (!!answerValue) ? true : answerReceived;
 
                 unitOfWork.updateQuestionByAnswer(
-                    input.attr('name'),
-                    input.attr('id'),
-                    extractValueAccordingToInpuType(input),
+                    $input.attr('name'),
+                    $input.attr('id'),
+                    answerValue,
                 );
-            }
+            }   
         );
+
+        return answerReceived;
+    }
+
+    function validateAnswers() {
+        $('.required').each()
+    }
+
+    function answerIsValid(questionIsRequired, answerToQuestionReceived) {
+        if (questionIsRequired && !answerToQuestionReceived) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     function submitInterviewResults() {
@@ -104,8 +143,13 @@
     }
 
     function onNextButtonClick() {
-        saveValuesFromInputs();
-        createPageWithQuestions(pagingController.getNextRangeOfItems());
+        try {
+            debugger;
+            saveValuesFromInputsWithValidation();
+            createPageWithQuestions(pagingController.getNextRangeOfItems());
+        } catch(err) {
+            alert(err);
+        }
     }
 
     function onSendButtonClick() {

@@ -18,6 +18,7 @@ function Repository() {
         {
             id: 0,
             typeId: 0,
+            isRequired: true,
             text: '0 В чём сила?',
             answers: [
                 0,
@@ -29,6 +30,7 @@ function Repository() {
         {
             id: 1,
             typeId: 1,
+            isRequired: true,
             text: '1 В чём сила?',
             answers: [
                 0,
@@ -69,6 +71,7 @@ function Repository() {
         {
             id: 6,
             typeId: 0,
+            isRequired: true,
             text: '6 В чём сила?',
             answers: [
                 0,

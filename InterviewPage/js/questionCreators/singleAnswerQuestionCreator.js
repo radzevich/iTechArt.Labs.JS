@@ -2,7 +2,6 @@ function createSingleAnswerQuestion() {
     var self = {};
 
     self.create = function (question, answers) {
-        
         var $div = $('<div></div');  
         var $form = $('<form class="form"></form>'); 
 
