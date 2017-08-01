@@ -58,16 +58,16 @@
 
     function checkIfCurrentRangeIsExtreme () {
         if (pagingController.currentRangeIsFirst()) {
-            $('.pager__previous-button').css('display', 'none');
+            hidePreviousButton('.pager__previous-button');
         } else {
-            $('.pager__previous-button').css('display', 'inline');
+            showPreviousButton('.pager__previous-button');
         }
         if (pagingController.currentRangeIsLast()) {
             $('.pager__next-button').text('Отправить');
-            changeNextButtonBehaviorToSend($('.pager__next-button'));
+            changeNextButtonBehaviorToSend('.pager__next-button');
         } else {
             $('.pager__next-button').text('Далее');
-            changeSendButtonBehaviorToNext($('.pager__next-button'));
+            changeSendButtonBehaviorToNext('.pager__next-button');
         }
     }
 
@@ -89,13 +89,12 @@
     function saveValuesFromInputsWithValidation() {
         $('.page__content li').children('div').each(
             function() {
-                // var questionIsRequired = !!(this.className === 'required'); 
-                // var answerReceived = saveValuesFromInputs.call(this, questionIsRequired);
+                var questionIsRequired = !!(this.className === 'required'); 
+                var answerReceived = saveValuesFromInputs.call(this, questionIsRequired);
 
-                // if (!answerIsValid(questionIsRequired, answerReceived)) {
-                //     debugger;
-                //     throw RESULTS_SAVING_ERROR_MESSAGE;
-                // }
+                if (!answerIsValid(questionIsRequired, answerReceived)) {
+                    throw RESULTS_SAVING_ERROR_MESSAGE;
+                }
                 console.log(this);
             }
         ) 
@@ -144,7 +143,6 @@
 
     function onNextButtonClick() {
         try {
-            debugger;
             saveValuesFromInputsWithValidation();
             createPageWithQuestions(pagingController.getNextRangeOfItems());
         } catch(err) {
@@ -153,9 +151,14 @@
     }
 
     function onSendButtonClick() {
-        submitInterviewResults();
-        removeBorderAroundInterviewBlock();
-        swapPagerButtonsToReload();
+        try {
+            saveValuesFromInputsWithValidation();
+            submitInterviewResults();
+            removeBorderAroundInterviewBlock();
+            swapPagerButtonsToReload();
+        } catch(err) {
+            alert(err);
+        }
     }
 
     function onPreviousButtonClick() {
@@ -163,15 +166,22 @@
         createPageWithQuestions(pagingController.getPreviousRangeOfItems());
     }
 
-    function changeNextButtonBehaviorToSend($button) {
-        $button.off('click')
-               .on ('click', onSendButtonClick);
+    function changeNextButtonBehaviorToSend(button) {
+        $(button).off('click')
+                 .on ('click', onSendButtonClick);
     }
 
-    function changeSendButtonBehaviorToNext($button) {
-        debugger;
-        $button.off('click')
-               .on ('click', onNextButtonClick);
+    function changeSendButtonBehaviorToNext(button) {
+        $(button).off('click')
+                 .on ('click', onNextButtonClick);
+    }
+
+    function hidePreviousButton(button) {
+        $(button).hide();
+    }
+
+    function showPreviousButton(button) {
+        $(button).show();
     }
 
     function swapPagerButtonsToReload() {
@@ -182,4 +192,8 @@
     function removeBorderAroundInterviewBlock() {
         $('.page').css('border', 'none');
     }
+
+    (function setOnNavigateButtonsHandlers () {
+        $('.pager__previous-button').on('click', onPreviousButtonClick);
+    })();
 })();
