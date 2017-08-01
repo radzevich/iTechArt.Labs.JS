@@ -9,8 +9,6 @@ function createFileQuestion() {
                 id: 0,
             });
 
-            console.log(question.answers[0]);
-
             $form.append($input);
             $div.append('<h4>' + question.text + '</h4>');  
             $div.append($form);

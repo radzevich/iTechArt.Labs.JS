@@ -8,7 +8,7 @@
 //  */
 // QuestionVisualElementFactory.prototype.getCreator = function (questionTypeId) {
 //     /**
-//      * Templates are devided into templates of quastions and another templates 
+//      * Templates are devided into templates of questions and another templates 
 //      * such as the one for creating message about saving interview results (service template).
 //      * And creators of both of them are contained in the _templateCreators array.
 //      * Some service templates can be both added or removed in the future. 
@@ -72,7 +72,7 @@ function QuestionVisualElementFactory() {}
 
 QuestionVisualElementFactory.prototype.getCreator = function (questionTypeId) {
     /**
-     * Templates are devided into templates of quastions and another templates 
+     * Templates are devided into templates of questions and another templates 
      * such as the one for creating message about saving interview results (service template).
      * And creators of both of them are contained in the _templateCreators array.
      * Some service templates can be both added or removed in the future. 
@@ -86,7 +86,7 @@ QuestionVisualElementFactory.prototype.getCreator = function (questionTypeId) {
     var _templateCreators = [
         createResultsSavedMessage,
         createSingleAnswerQuestion,
-        createMultyAnswerQuestion,
+        createMultiAnswerQuestion,
         textAnswerQuestion,
         crateRatingQuestion,
         createFileQuestion,

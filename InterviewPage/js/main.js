@@ -95,7 +95,6 @@
                 if (!answerIsValid(questionIsRequired, answerReceived)) {
                     throw RESULTS_SAVING_ERROR_MESSAGE;
                 }
-                console.log(this);
             }
         ) 
     }
