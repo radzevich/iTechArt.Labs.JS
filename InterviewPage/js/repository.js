@@ -54,7 +54,7 @@ function Repository() {
             id: 3,
             typeId: 3,
             text: 'В чём сила?',
-            answers: []
+            answers: {}
         },
         {
             id: 4,

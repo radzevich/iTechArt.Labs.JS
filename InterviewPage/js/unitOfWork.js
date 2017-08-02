@@ -80,7 +80,7 @@ var UnitOfWork = function () {
 
         updateQuestionByAnswer: function (questionId, answerId, newValueToUpdate) {
             var question = getQuestionById(questionId);
- 
+
             question.answers[answerId] = newValueToUpdate;
         },
 

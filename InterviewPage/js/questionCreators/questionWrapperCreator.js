@@ -9,6 +9,7 @@ function WrapperCreator() {
             templateParser.setTemplate(wrapperTemplate);
             templateParser.setTemplateVariable('{NUM}', num);
             templateParser.setTemplateVariable('{HEADER}', question.text);
+            templateParser.setTemplateVariable('{TYPE_ID}', question.typeId);
 
             return templateParser.parseTemplate(true);
         }

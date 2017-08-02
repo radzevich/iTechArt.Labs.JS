@@ -73,15 +73,16 @@
         }
     }
 
-    // TODO: make indepent of another value but not of the type.
-    function extractValueAccordingToInpuType($input) {
-        switch ($input.attr('type')) {
-            case 'radio':
-            case 'checkbox':
+    function extractValueAccordingToQuestionType($input, questionTypeId) {
+        switch (questionTypeId) {
+            case '0':
+            case '1':
+            case '4':
                 return $input.prop('checked');
-            case 'text':
-            case 'file':
-            case 'range':
+            case '2':
+            case '3':
+            case '5':
+            case '6':
                 return $input.prop('value');
             default:
                 return '';
@@ -104,22 +105,53 @@
     function saveValuesFromInputs() {
         var answerReceived = false;
 
-        $(this).find('.form input').each(
-            function (index) {  
-                var $input = $(this);
-                var answerValue = extractValueAccordingToInpuType($input);
+        var $inputForm = $(this).find('.form');
+        var questionTypeId = $inputForm.attr('id');
 
+        $(this).find('input').each(
+            function () {  
+                var $input = $(this);
+                var answerValue = getAnswersAccordingToQuestionType($input, questionTypeId);
+                
                 answerReceived = (!!answerValue) ? true : answerReceived;
 
                 unitOfWork.updateQuestionByAnswer(
                     $input.attr('name'),
-                    $input.attr('id'),
+                    getInputId($input),
                     answerValue,
                 );
             }   
         );
-
         return answerReceived;
+    }
+
+    function getAnswersAccordingToQuestionType($input, questionTypeId) {
+        switch (questionTypeId) {
+            case '0':
+            case '1':
+            case '3':
+                return $input.prop('checked')
+            case '2':
+            case '4':
+            case '5':
+            case '6':
+                return $input.prop('value');
+            default:
+                return '';
+        }
+    }
+
+    function getInputId($input) {
+        var inputId = $input.attr('id');
+        var numberFromInputId = '';
+
+        for (var i = 0; i < inputId.length; i++) {
+            if (inputId[i] >= '0' && inputId[i] <= '9') {
+                numberFromInputId += inputId[i];
+            }
+        }
+        
+        return numberFromInputId;
     }
 
     function validateAnswers() {

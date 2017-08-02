@@ -1,0 +1,40 @@
+fieldset, .rating-label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+.rating { 
+    border: none;
+    float: left;
+}
+
+.rating > .rating-input { 
+    display: none; 
+} 
+
+.rating > .rating-label:before { 
+    margin: 5px;
+    font-size: 1.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+
+.rating > .half:before { 
+    content: "\f089";
+    position: absolute;
+}
+
+.rating > .rating-label { 
+    color: #ddd; 
+    float: right; 
+}
+
+
+.rating > .rating-input:checked ~ .rating-label, /* show gold star when clicked */
+.rating:not(:checked) > .rating-label:hover, /* hover current star */
+.rating:not(:checked) > .rating-label:hover ~ .rating-label { color: #000000;  } /* hover previous stars in list */
+
+.rating > .rating-input:checked + .rating-label:hover, /* hover current star when changing rating */
+.rating > .rating-input:checked ~ .rating-label:hover,
+.rating > .rating-label:hover ~ .rating-input:checked ~ .rating-label, /* lighten current selection */
+.rating > .rating-input:checked ~ .rating-label:hover ~ .rating-label { color: #5F5F5F;  } 

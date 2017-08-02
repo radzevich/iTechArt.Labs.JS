@@ -13,7 +13,8 @@ function crateRatingQuestion() {
             templateParser.setTemplate(template);
             templateParser.setTemplateVariable('{ID}', i * 2);
             templateParser.setTemplateVariable('{ID_HALF}', i * 2 + 1);
-            templateParser.setTemplateVariable('{VALUE}', !!question.answers[0] ? ' checked="true" ' : '');
+            templateParser.setTemplateVariable('{IS_CHECKED_FULL}', !!question.answers[i * 2] ? ' checked="true" ' : '');
+            templateParser.setTemplateVariable('{IS_CHECKED_HALF}', !!question.answers[i * 2 + 1] ? ' checked="true" ' : '');
 
             answersTemplate += templateParser.parseTemplate();
         }

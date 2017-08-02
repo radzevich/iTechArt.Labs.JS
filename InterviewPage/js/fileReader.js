@@ -16,10 +16,10 @@ function FileReader() {
                                 '<label class="interview-input_label">{TEXT}</label></div>';
 
                 case 'templates/ratingAnswerTemplate.html':
-                    return '<input class="rating_input" type="radio" id="{ID}star" name="{NAME}" value="{VALUE}" />' + 
-                                '<label class="full" for="{ID}star"></label>' +
-                           '<input class="rating_input" type="radio" id="{ID_HALF}half-star" name="{NAME}" value="{VALUE}" />' + 
-                                '<label class="half" for="{ID_HALF}half-star"></label>'
+                    return  '<input class="rating-input" type="radio" id="{ID}star" {IS_CHECKED_FULL} name="{NAME}"/>' + 
+                            '<label class="rating-label full" for="{ID}star"></label>' +
+                            '<input class="rating-input" type="radio" id="{ID_HALF}star_half" {IS_CHECKED_HALF} name="{NAME}"/>' + 
+                            '<label class="rating-label half" for="{ID_HALF}star_half"></label>'
 
                 case 'templates/rangeAnswerTemplate.html':
                     return '<div><input type="range" name="{NAME}" id="{ID}" value="{VALUE}"></div>';
@@ -32,7 +32,7 @@ function FileReader() {
                     return '<input type="text" name="{NAME}" id="{ID}" value="{VALUE}">';
 
                 case 'templates/wrapper.html':
-                    return '<div><h4>{NUM} {HEADER}</h4><form class="form">{ANSWERS}</form></div>';
+                    return '<div><h4>{NUM} {HEADER}</h4><form class="form" id="{TYPE_ID}">{ANSWERS}</form></div>';
 
                 case 'templates/resultsSavedMessageTemplate.html':
                     return '<div><p class="results-saved">Ваши ответы получены, спасибо!</p></div>'
