@@ -1,59 +1,31 @@
 function crateRatingQuestion() {
-    const RATING_VALUES_NUMBER = 5;
+    const STAR_NUMBER = 5;
 
-    function createCustomCheckbox(questionId, answerId, isChecked) {
-        return  '<div class="interview-input_rating-div">' + 
-                    '<input class="interview-input_rating-checkbox" type="checkbox" name="' + questionId + '" id="' + answerId + '" checked="' + !!isChecked + '">' +
-                    '<label><span class="glyphicon glyphicon-star-empty"></span></label>' +
-                '</div>';
-    }
+    var fileReader = new FileReader();
+    var templateParser = new TemplateParser();
 
-    function addCustomBehavior($checkbox) {
-        $checkbox.click(function () {
-            var clickedCheckboxId = $checkbox.attr('id');
-            var $parentForm = $checkbox.closest('form');
-            var childInputs = $parentForm.children('input');
+    function createAnswers(template, question) {
+        var answersTemplate = '<fieldset class="rating">';
 
-            debugger;
-            for (var i = 0; i <= childInputs.length; i++) {
-                var $span = childInputs[i].children('span');
+        templateParser.setTemplateVariable('{NAME}', question.id);
 
-                if (i <= clickedCheckboxId) {
-                    setActiveClass($span);
-                } else {
-                    setPassiveClass($span);
-                }
-            }     
-        })
-    }
+        for (let i = 0; i < STAR_NUMBER; i++) {
+            templateParser.setTemplate(template);
+            templateParser.setTemplateVariable('{ID}', i * 2);
+            templateParser.setTemplateVariable('{ID_HALF}', i * 2 + 1);
+            templateParser.setTemplateVariable('{VALUE}', !!question.answers[0] ? ' checked="true" ' : '');
 
-    function setActiveClass($span) {
-        $span.removeClass('glyphicon glyphicon-star-empty');
-        $span.addClass('glyphicon glyphicon-star');
-    }
-
-    function setPassiveClass($span) {
-        $span.removeClass('glyphicon glyphicon-star');
-        $span.addClass('glyphicon glyphicon-star-empty');   
+            answersTemplate += templateParser.parseTemplate();
+        }
+        
+        return answersTemplate + '</fieldset>';
     }
 
     return {
         create: function (question) {
-            var $div = $('<div></div>');
-            var $form = $('<form class="form"></form>');
+            var answerTemplate = fileReader.read('templates/ratingAnswerTemplate.html');
 
-            for (var i = 0; i < RATING_VALUES_NUMBER; i++) {
-                $form.append(createCustomCheckbox(
-                    question.id,
-                    i + 1, 
-                    question.answers[0],
-                )); 
-            }
-
-            $div.append('<h4>' + question.text + '</h4>');  
-            $div.append($form);
-
-            return $div;
+            return createAnswers(answerTemplate, question);
         }
     }
 }

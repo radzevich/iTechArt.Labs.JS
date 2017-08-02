@@ -17,7 +17,10 @@ function TemplateParser() {
 
         parseTemplate: function (resetAfterParsingFlag) {
             for (var keyToFind in varsToReplace) {
-                template = template.replace(keyToFind, varsToReplace[keyToFind]);
+                do {
+                    var previousVersion = template; 
+                    template = template.replace(keyToFind, varsToReplace[keyToFind]);
+                } while (previousVersion !== template);
             }
 
             if (resetAfterParsingFlag) {

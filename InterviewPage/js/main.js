@@ -20,7 +20,7 @@
 
         for (var i = 0; i < questions.length; i++) {
             var questionNum = pagingController.getPageNum() * NUMBER_OF_ITEMS_ON_PAGE + i;
-            
+
             var $question = $(templateCreator.createQuestion(
                 questions[i],
                 unitOfWork.getAnswersToTheQuestion(questions[i]),
@@ -141,23 +141,23 @@
     }
 
     function onNextButtonClick() {
-        // try {
+        try {
             saveValuesFromInputsWithValidation();
             createPageWithQuestions(pagingController.getNextRangeOfItems());
-        // } catch(err) {
-        //     alert(err);
-        // }
+        } catch(err) {
+            alert(err);
+        }
     }
 
     function onSendButtonClick() {
-        // try {
+        try {
             saveValuesFromInputsWithValidation();
             submitInterviewResults();
             removeBorderAroundInterviewBlock();
             swapPagerButtonsToReload();
-        // } catch(err) {
-        //     alert(err);
-        // }
+        } catch(err) {
+            alert(err);
+        }
     }
 
     function onPreviousButtonClick() {
