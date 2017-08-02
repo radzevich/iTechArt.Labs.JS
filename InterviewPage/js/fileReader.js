@@ -35,7 +35,7 @@ function FileReader() {
                     return '<div><h4>{NUM} {HEADER}</h4><form class="form" id="{TYPE_ID}">{ANSWERS}</form></div>';
 
                 case 'templates/resultsSavedMessageTemplate.html':
-                    return '<div><p class="results-saved">Ваши ответы получены, спасибо!</p></div>'
+                    return '<div class="results-saved-message"><p>Ваши ответы получены, спасибо!</p></div>'
             }
         }
     }

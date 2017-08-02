@@ -73,22 +73,6 @@
         }
     }
 
-    function extractValueAccordingToQuestionType($input, questionTypeId) {
-        switch (questionTypeId) {
-            case '0':
-            case '1':
-            case '4':
-                return $input.prop('checked');
-            case '2':
-            case '3':
-            case '5':
-            case '6':
-                return $input.prop('value');
-            default:
-                return '';
-        }
-    }
-
     function saveValuesFromInputsWithValidation() {
         $('.page__content li').children('div').each(
             function() {
@@ -193,7 +177,11 @@
     }
 
     function onPreviousButtonClick() {
-        saveValuesFromInputs();
+        $('.page__content li').children('div').each(
+            function () {
+                saveValuesFromInputs.call(this);
+            }
+        );
         createPageWithQuestions(pagingController.getPreviousRangeOfItems());
     }
 
