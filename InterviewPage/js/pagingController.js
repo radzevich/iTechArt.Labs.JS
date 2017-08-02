@@ -42,5 +42,9 @@ var PagingController = function(pageItems, numberOfItemsInTheRange) {
         currentRangeIsLast: function () {
             return currentRange.endIndex === pageItems.length;
         },
+
+        getPageNum: function () {
+            return Math.floor(currentRange.startIndex / numberOfItemsInTheRange);
+        }
     };
 }

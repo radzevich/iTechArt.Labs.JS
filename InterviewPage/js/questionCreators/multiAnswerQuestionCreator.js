@@ -1,4 +1,4 @@
-function createSingleAnswerQuestion() {
+function createMultiAnswerQuestion() {
     var fileReader = new FileReader();
     var templateParser = new TemplateParser();
 
@@ -22,7 +22,7 @@ function createSingleAnswerQuestion() {
 
     return {
         create: function (question, answers) {
-            var fileAnswerTemplate = fileReader.read('templates/singleAnswerTemplate.html');
+            var fileAnswerTemplate = fileReader.read('templates/multiAnswerTemplate.html');
 
             return createAnswers(fileAnswerTemplate, question, answers);
         }

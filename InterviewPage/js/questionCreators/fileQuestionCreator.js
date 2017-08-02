@@ -1,19 +1,20 @@
 function createFileQuestion() {
+    var fileReader = new FileReader();
+    var templateParser = new TemplateParser();
+
+    function createAnswers(template, question) {
+        templateParser.setTemplate(template);
+        templateParser.setTemplateVariable('{NAME}', question.id);
+        templateParser.setTemplateVariable('{ID}', 0);
+
+        return templateParser.parseTemplate(true);
+    }
+
     return {
         create: function (question) {
-            var $div = $('<div></div'); 
-            var $form = $('<form class="form"></form>');
-            var $input = $('<input>').attr({ 
-                type: 'file',  
-                name: question.id, 
-                id: 0,
-            });
+            var fileAnswerTemplate = fileReader.read('templates/fileAnswerTemplate.html');
 
-            $form.append($input);
-            $div.append('<h4>' + question.text + '</h4>');  
-            $div.append($form);
-
-            return $div;
+            return createAnswers(fileAnswerTemplate, question);
         }
     }
 }

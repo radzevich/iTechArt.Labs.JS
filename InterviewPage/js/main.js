@@ -3,7 +3,7 @@
     const RESULTS_SAVING_ERROR_MESSAGE = 'Ответы не на все обязательные вопросы получены!';
 
     var unitOfWork = new UnitOfWork();
-    var factory = new QuestionVisualElementFactory(); 
+    var templateCreator = new TemplateCreator(); 
     var pagingController = new PagingController(unitOfWork.getQuestions(), NUMBER_OF_ITEMS_ON_PAGE);
 
     createPageWithQuestions(pagingController.getNextRangeOfItems());
@@ -19,11 +19,13 @@
         var $ul = $('<ul></ul>');
 
         for (var i = 0; i < questions.length; i++) {
-            var questionCreator = factory.getCreator(questions[i].typeId);
-            var $question = questionCreator.create(
-                questions[i], 
-                unitOfWork.getAnswersToTheQuestion(questions[i])
-            );
+            var questionNum = pagingController.getPageNum() * NUMBER_OF_ITEMS_ON_PAGE + i;
+            
+            var $question = $(templateCreator.createQuestion(
+                questions[i],
+                unitOfWork.getAnswersToTheQuestion(questions[i]),
+                questionNum
+            ));
 
             if (questions[i].isRequired) {
                 markQuestionAsRequired($question);
@@ -135,29 +137,27 @@
     function submitInterviewResults() {
         unitOfWork.saveResults();
 
-        var savedMessageCreator = factory.getCreator(-1);
-
-        displayContentOnPage('.page', savedMessageCreator.create());
+        displayContentOnPage('.page', templateCreator.createMessage(-1));
     }
 
     function onNextButtonClick() {
-        try {
+        // try {
             saveValuesFromInputsWithValidation();
             createPageWithQuestions(pagingController.getNextRangeOfItems());
-        } catch(err) {
-            alert(err);
-        }
+        // } catch(err) {
+        //     alert(err);
+        // }
     }
 
     function onSendButtonClick() {
-        try {
+        // try {
             saveValuesFromInputsWithValidation();
             submitInterviewResults();
             removeBorderAroundInterviewBlock();
             swapPagerButtonsToReload();
-        } catch(err) {
-            alert(err);
-        }
+        // } catch(err) {
+        //     alert(err);
+        // }
     }
 
     function onPreviousButtonClick() {
@@ -196,3 +196,4 @@
         $('.pager__previous-button').on('click', onPreviousButtonClick);
     })();
 })();
+

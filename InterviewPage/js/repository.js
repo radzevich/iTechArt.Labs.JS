@@ -19,7 +19,7 @@ function Repository() {
             id: 0,
             typeId: 0,
             isRequired: true,
-            text: '0 В чём сила?',
+            text: 'В чём сила?',
             answers: [
                 0,
                 1,
@@ -31,7 +31,7 @@ function Repository() {
             id: 1,
             typeId: 1,
             isRequired: true,
-            text: '1 В чём сила?',
+            text: 'В чём сила?',
             answers: [
                 0,
                 1,
@@ -42,7 +42,7 @@ function Repository() {
         {
             id: 2,
             typeId: 2,
-            text: '2 В чём сила?',
+            text: 'В чём сила?',
             answers: [
                 0,
                 1,
@@ -53,26 +53,26 @@ function Repository() {
         {
             id: 3,
             typeId: 3,
-            text: '3 В чём сила?',
+            text: 'В чём сила?',
             answers: []
         },
         {
             id: 4,
             typeId: 4,
-            text: '4 В чём сила?',
+            text: 'В чём сила?',
             answers: []
         },
         {
             id: 5,
             typeId: 5,
-            text: '5 В чём сила?',
+            text: 'В чём сила?',
             answers: []
         },
         {
             id: 6,
             typeId: 0,
             isRequired: true,
-            text: '6 В чём сила?',
+            text: 'В чём сила?',
             answers: [
                 0,
                 1,
@@ -83,7 +83,7 @@ function Repository() {
         {
             id: 7,
             typeId: 1,
-            text: '7 В чём сила?',
+            text: 'В чём сила?',
             answers: [
                 0,
                 1,

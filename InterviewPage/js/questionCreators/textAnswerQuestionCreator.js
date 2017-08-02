@@ -1,11 +1,21 @@
 function textAnswerQuestion() {
-    var self = {};
+    var fileReader = new FileReader();
+    var templateParser = new TemplateParser();
 
-    self.create = function (question) {
-        return  $('<div><h4>' + question.text + '</h4><form class="form">' + 
-                    '<input type="text" name="' + question.id + '" id="' + 0 + '" value="' + question.answers[0] + '">' +
-                '</form></div>');
+    function createAnswers(template, question) {
+        templateParser.setTemplate(template);
+        templateParser.setTemplateVariable('{NAME}', question.id);
+        templateParser.setTemplateVariable('{ID}', 0);
+        templateParser.setTemplateVariable('{VALUE}', question.answers[0]);
+
+        return templateParser.parseTemplate(true);
     }
 
-    return self;
+    return {
+        create: function (question) {
+            var fileAnswerTemplate = fileReader.read('templates/textAnswerTemplate.html');
+
+            return createAnswers(fileAnswerTemplate, question);
+        }
+    }
 }

@@ -1,9 +1,23 @@
 function createRangeQuestion() {
+    var fileReader = new FileReader();
+    var templateParser = new TemplateParser();
+
+    function createAnswers(template, question) {
+        templateParser.setTemplate(template);
+        templateParser.setTemplateVariable('{NAME}', question.id);
+        templateParser.setTemplateVariable('{ID}', 0);
+        templateParser.setTemplateVariable('{VALUE}', question.answers[0]);
+        templateParser.setTemplateVariable('{MIN}', question.answers[1]);
+        templateParser.setTemplateVariable('{MAX}', question.answers[2]);
+
+        return templateParser.parseTemplate(true);
+    }
+
     return {
         create: function (question) {
-            return  $('<div><h4>' + question.text + '</h4><form class="form">' + 
-                        '<input type="range" name="' + question.id + '" id="' + 0 + '" value="' + question.answers[0] + '">' +
-                    '</form></div>');
+            var fileAnswerTemplate = fileReader.read('templates/rangeAnswerTemplate.html');
+
+            return createAnswers(fileAnswerTemplate, question);
         }
     }
 }
