@@ -1,0 +1,13 @@
+.required {
+    position: relative;
+}
+
+.required:before {
+    position: absolute;
+    left: -17px;
+	top: 0;
+    content: '\2605'; 
+    padding-right: 8px;
+    color: #FF0000;
+    font-size: 12px;
+}

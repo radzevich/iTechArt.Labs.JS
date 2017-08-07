@@ -1,0 +1,62 @@
+<!--ForEach function is a void one that's why use console to see it's output-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Test JS</title>
+        <link rel='stylesheet' href="./style/body.css" type='text/css'/>
+        <link rel='stylesheet' href="./style/operation-field.css" type='text/css'/>
+    </head>
+    <body>
+        <header class="header">
+            <div class="input-form">
+                <span>Push to generate new test data </span>
+                <button class="button form__button_generate">Generate!</button>
+            </div>
+        </header>
+        <div class="content">
+            <div class="array-display_source">
+                <h3 class="array-display__header">All Elements of the Array:</h3>
+            </div>
+            <div class="operation-field">
+                <div class="block">
+                    <button class="button block__button_for-each">forEach</button>
+                    <label class="params">x * 10</label>
+                </div>
+                <div class="block">
+                    <button class="button block__button_where">where</button>
+                    <label class="params">5 &le; x &le; 10</label>
+                </div>
+                <div class="block">
+                    <button class="button block__button_first">first</button>
+                </div>
+                <div class="block">
+                    <button class="button block__button_last">last</button>
+                </div>
+                <div class="block">
+                    <button class="button block__button_select">select</button>
+                    <label class="params">is number</label>
+                </div>
+                <div class="block">
+                    <button class="button block__button_skip">skip</button>
+                    <input class="params skip-input" id="skip-block__number-input" type="text"/>
+                </div>
+                <div class="block">
+                    <button class="button block__button_take">take</button>
+                    <input class="params take-input" id="take-block__number-input" type="text"/>
+                </div>
+            </div>
+            <div class="array-display_result">
+                <h3 class="array-display__header">Elements of the processed Array:</h3>
+                <ul class="array-display__list_proc"></ul>
+            </div>
+        </div>
+        <script src="./small-lib/typeCheckFunctions.js"></script>
+        <script src="./small-lib/arrayFunctions.js"></script>
+        <script src="./js/jquery-3.2.1.min.js"></script>
+        <script src="./js/testDataGenerator.js"></script>
+        <script src="./js/testFunctions.js"></script>
+        <script src="./js/main.js"></script>
+    </body>
+</html>

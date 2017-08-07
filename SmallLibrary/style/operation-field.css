@@ -1,0 +1,12 @@
+.operation-field > div {
+    height: 30px
+}
+
+.operation-field .button {
+    min-width: 80px;
+}
+
+.operation-field .params {
+    margin-left: 5px;
+    width: 120px;
+}
