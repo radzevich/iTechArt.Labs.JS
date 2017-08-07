@@ -39,21 +39,23 @@ var UnitOfWork = function () {
     }
 
     function createListOfJsonAnswers(questionList) {
-        var jsonAnswerList = {};
+        var jsonAnswerList = [];
         
         for (var i = 0; i < questionList.length; i++) {
             var questionId = questionList[i].id;
             var answers = questionList[i].answers;
 
-            jsonAnswerList[questionId] = {};
-            jsonAnswerList[questionId].answers = {};
+            jsonAnswerList[i] = {
+                'questionId': questionId,
+                'answers': {},
+            };
 
             for (var id in answers) {
                 if (!answers[id]) {
                     continue;
                 }
 
-                jsonAnswerList[questionId].answers[id] = answers[id];
+                jsonAnswerList[i].answers[id] = answers[id];
             } 
         }   
         return jsonAnswerList;   
