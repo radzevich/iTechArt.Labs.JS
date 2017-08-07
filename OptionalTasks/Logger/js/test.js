@@ -5,8 +5,8 @@
     function submitValue() {
         logger = getSelectedTypeOfLogger();
         inputValue = getInputValue();
-        
-        logger.log(inputValue);
+
+        //logger.log(inputValue);
     }
 
     function getSelectedTypeOfLogger() {

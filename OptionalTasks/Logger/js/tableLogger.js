@@ -1,9 +1,6 @@
 function TableLogger() {
-    function deriveFromObject(base) {
-        function F() {};
-        F.prototype = base;
-        return new F();
-    }
+    BaseLogger.call(this);
+    
 
     function removeEmptyWordsFromArray(arrayOfWords) {
         var removedItemsCount = 0;
@@ -26,13 +23,8 @@ function TableLogger() {
         return removeEmptyWordsFromArray(arrayOfWords);
     }
 
-    var self = deriveFromObject(BaseLogger);
 
-    self.log = function (inputStringToLog) {
-        self.prototype.log(
-            splitStringIntoWords(inputStringToLog).join(' | ')
-        );
+    this.processString = function(inputStringToLog) {
+        return splitStringIntoWords(inputStringToLog).join(' | ');
     }
-
-    return self;
 }

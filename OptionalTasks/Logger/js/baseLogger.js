@@ -1,5 +1,10 @@
-function BaseLogger() {}
+function BaseLogger() {
+	this.processString = function (inputStringToLog) {
+		return inputStringToLog;
+	}
 
-BaseLogger.prototype.log = function (inputStringToLog) {
-    console.log(inputStringToLog);
+	this.log = function (inputStringToLog) {
+		var stringToLog = this.processString(inputStringToLog);
+		console.log(stringToLog);
+	}
 }
